@@ -1,0 +1,6 @@
+TO DO:
+
+1. Validação no LOGIN (Melhor fazer dps de implementar login com google)
+2. ----- [DONE] ----- Usuário LOGADO não pode permanecer na tela de LOGIN ou CADASTRO (middleware 'guest' (built-in))
+3. Login com google
+4. Login com facebook

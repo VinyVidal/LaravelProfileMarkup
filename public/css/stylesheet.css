@@ -1,0 +1,85 @@
+body,
+html {
+    height: 100%;
+}
+
+
+/* 
+    --------------------
+       CUSTOM COLORS
+    --------------------
+*/
+
+.bg-main {
+    background-color: #13138A !important;
+}
+
+.text-main {
+    color: #3BD1B3 !important;
+}
+
+.border-main {
+    border-color: #3BD1B3 !important;
+}
+
+
+/* 
+    --------------------
+          BORDERS
+    --------------------
+*/
+
+.rounded-plus {
+    border-radius: 3%;
+}
+
+.border-wide {
+    border-width: 3px !important;
+}
+
+
+/* 
+    --------------------
+          LINKS/ANCHORS
+    --------------------
+*/
+
+.link-main {
+    color: #fafafa;
+}
+
+
+/* 
+    --------------------
+          FORM
+    --------------------
+*/
+
+.form-group textarea {
+    resize: none;
+}
+
+#profile-picture {
+    cursor: pointer;
+}
+
+#photo {
+    display: none;
+}
+
+
+/* 
+    --------------------
+       Extra
+    --------------------
+*/
+
+.img {
+    width: 50%;
+    height: 30%;
+}
+
+.img-thumbnail {
+    max-width: 40%;
+    width: 40%;
+}
