@@ -19,7 +19,7 @@ class UserSocialService {
             $user = new User;
             $user->fullName = $socialUser->name;
             $user->email = $socialUser->email;
-            $user->birth = '2001-01-01';
+            $user->birth = $socialUser->birthday;
 
             if($socialUser->nickname)
                 $user->username = $socialUser->nickname;
@@ -59,8 +59,19 @@ class UserSocialService {
             
         } 
         catch (Exception $e) {
+            dd($e->getMessage());
             return $e->getMessage();
         }
     }
     
+    // Temporary stores social user data into session variable
+    public function storeTemp(\Laravel\Socialite\Two\User $socialUser)
+    {
+        session()->put('socialUser', $socialUser);
+
+        return [
+            'success' => true,
+        ];
+    }
+
 }

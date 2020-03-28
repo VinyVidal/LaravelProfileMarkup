@@ -27,8 +27,11 @@ Route::group(['middleware' => 'guest'], function () {
     Route::get('sign-up/account', ['as' => 'user.sign-up.step3', 'uses' => 'UsersController@showSignUpStep3']);
     Route::post('sign-up/step3', ['as' => 'user.sign-up.step3.store', 'uses' => 'UsersController@postSignUpStep3']);
 
+
     /* -------------- GOOGLE OAUTH ROUTES --------------*/
     Route::get('/redirect', ['as' => 'auth.google.redirect', 'uses' => 'SocialAuthGoogleController@redirect']);
     Route::get('/callback', ['as' => 'auth.google.callback', 'uses' => 'SocialAuthGoogleController@callback']);
+    Route::get('sign-up/googleExtra', ['as' => 'auth.google.sign-up.extra', 'uses' => 'SocialAuthGoogleController@showSignUpExtra']);
+    Route::post('sign-up/googleExtra', ['as' => 'user.google.sign-up.extra.store', 'uses' => 'SocialAuthGoogleController@postSignUpExtra']);
 });
 

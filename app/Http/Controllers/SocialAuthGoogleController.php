@@ -7,6 +7,7 @@ use App\Services\UserSocialService;
 use Laravel\Socialite\Facades\Socialite;
 use App\Entities\User;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserCreateExtraGoogleRequest;
 
 class SocialAuthGoogleController extends Controller
 {
@@ -47,9 +48,58 @@ class SocialAuthGoogleController extends Controller
         }
         else {
             // Create a new user entirely through google oauth
-            $return = $this->service->storeNew($googleUser);
+            $return = $this->service->storeTemp($googleUser); // Temporary
+            // First check if user have all required information for creating it
+            // Required information that may not be fetched is: Birthday
+            if(!isset($googleUser->birthday))
+            {
+                // Redirect user to a page to enter missing data
+                
+                return redirect()->route('auth.google.sign-up.extra');
+            }
+            else
+            {
+                
+                $return = $this->service->storeNew($googleUser);
+                if($return['success'])
+                {
+                    Auth::loginUsingId($return['user']->id);
+                    return redirect()->route('index');
+                }
+                else
+                {
+                    return redirect()->route('user.login', [
+                        'message' -> $return['message']
+                    ]);
+                }
+            }
+        }
+    }
+
+    public function showSignUpExtra()
+    {
+        return view('user.sign-up_extra_social', [
+            'route' => 'user.google.sign-up.extra.store',
+        ]);
+    }
+
+    public function postSignUpExtra(UserCreateExtraGoogleRequest $request)
+    {
+        $data = $request->all();
+        $user = session()->get('socialUser');
+        // Fill extra data (manually birthday)
+        $user->birthday = $data['birthday'];
+        $return = $this->service->storeNew($user);
+        if($return['success'])
+        {
             Auth::loginUsingId($return['user']->id);
             return redirect()->route('index');
+        }
+        else
+        {
+            return redirect()->route('user.login', [
+                'message' -> $return['message']
+            ]);
         }
     }
 }
