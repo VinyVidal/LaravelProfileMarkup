@@ -71,9 +71,9 @@ class UserService {
         $user->password = env('PW_CRYPT') ? bcrypt($user->password) : $user->password;
         if(isset($user->photo))
         {
-            $filename = explode('/', $user->photo)[2];
+            $filename = end(explode('/', $user->photo)); # TESTAR
             Storage::disk('public')->move($user->photo, 'images/'.$user->username.'/'.$filename);
-            $user->photo = Storage::url($filename);
+            $user->photo = Storage::url('images/'.$user->username.'/'.$filename);
         }
 
         $user->save();

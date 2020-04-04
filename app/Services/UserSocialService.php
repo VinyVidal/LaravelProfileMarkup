@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Entities\UserSocial;
 use App\Entities\User;
 use Laravel\Socialite\Facades\Socialite;
+use Illuminate\Support\Str;
 
 
 class UserSocialService {
@@ -26,6 +27,12 @@ class UserSocialService {
             else    
                 $user->generateUsername();
 
+            //Storing user photo
+            $filename = Str::random(40).'.png';
+            if(Storage::disk('public')->put('images/'.$user->username.'/'.$filename, file_get_contents($socialUser->avatar)))
+            {
+                $user->photo = Storage::url('images/'.$user->username.'/'.$filename);
+            }
                 
             $user->setNewPassword();
 

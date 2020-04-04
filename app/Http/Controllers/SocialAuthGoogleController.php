@@ -36,7 +36,9 @@ class SocialAuthGoogleController extends Controller
             {
                 // login that user
                 Auth::loginUsingId($existUser->id);
-                return redirect()->route('index');
+                return redirect()->route('index', [
+                    'message' => 'Bem vindo novamente!',
+                ]);
             }
             // Else user already had an account but never signed up with google
             else
