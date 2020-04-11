@@ -21,7 +21,7 @@
     @endif
 
     @if (isset($sub))
-    <small class="form-text {{ $subClass ?? 'text-muted' }}">{{ $sub }}</small>
+        <small class="form-text {{ $subClass ?? 'text-muted' }}">{{ $sub }}</small>
     @endif
     
 </div>

@@ -97,12 +97,13 @@ class UserService {
     ---------------------------------
     */
 
-    public function auth(array $data)
+    public function auth(array $data, bool $rememberUser)
     {
         if(env('PW_CRYPT'))
         {
             // Login com senha encriptada
-            if(Auth::attempt($data))
+
+            if(Auth::attempt($data, $rememberUser))
             {
                 return ['success' => true];
             }
@@ -123,7 +124,7 @@ class UserService {
             $user = $user->first();
             if($user)
             {
-                Auth::login($user);
+                Auth::login($user, $rememberUser);
                 
                 return ['success' => true];
                 

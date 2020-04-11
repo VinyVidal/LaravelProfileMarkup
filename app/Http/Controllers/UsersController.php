@@ -128,8 +128,11 @@ class UsersController extends Controller
 
     public function doLogin(Request $request)
     {
+        $rememberUser = $request->get('remember');
         $credentials = $request->only('email', 'password');
-        $return = $this->service->auth($credentials);
+            
+        $return = $this->service->auth($credentials, $rememberUser ? true : false);
+        
 
         if($return['success'])
         {
