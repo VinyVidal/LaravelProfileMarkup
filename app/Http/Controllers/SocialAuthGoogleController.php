@@ -35,7 +35,7 @@ class SocialAuthGoogleController extends Controller
             if($existUser->socials->where('social_network', 'google'))
             {
                 // login that user
-                Auth::loginUsingId($existUser->id);
+                Auth::loginUsingId($existUser->id, true); // Auto remember user
                 return redirect()->route('index', [
                     'message' => 'Bem vindo novamente!',
                 ]);
@@ -65,7 +65,7 @@ class SocialAuthGoogleController extends Controller
                 $return = $this->service->storeNew($googleUser);
                 if($return['success'])
                 {
-                    Auth::loginUsingId($return['user']->id);
+                    Auth::loginUsingId($return['user']->id, true);
                     return redirect()->route('index');
                 }
                 else
@@ -94,7 +94,7 @@ class SocialAuthGoogleController extends Controller
         $return = $this->service->storeNew($user);
         if($return['success'])
         {
-            Auth::loginUsingId($return['user']->id);
+            Auth::loginUsingId($return['user']->id, true);
             return redirect()->route('index');
         }
         else
