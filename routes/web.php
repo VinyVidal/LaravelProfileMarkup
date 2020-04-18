@@ -11,8 +11,16 @@
 |
 */
 
-Route::get('/', ['as' => 'index', 'middleware' => 'auth', 'uses' => 'Controller@index']);
+# Main Routes (logged in users)
+Route::group(['middleware' => 'auth'], function () {
 
+    Route::get('/', ['as' => 'index', 'middleware' => 'auth', 'uses' => 'Controller@index']);
+
+    /* -------------- USER LOGOUT --------------*/
+    Route::get('/logout', ['as' => 'user.logout', 'uses' => 'UsersController@doLogout']);
+});
+
+# Route for logged out users
 Route::group(['middleware' => 'guest'], function () {
     /* -------------- LOGIN/REGISTRATION ROUTES --------------*/
     Route::get('login', ['as' => 'user.login', 'uses' => 'UsersController@showLogin']);
@@ -26,6 +34,7 @@ Route::group(['middleware' => 'guest'], function () {
 
     Route::get('sign-up/account', ['as' => 'user.sign-up.step3', 'uses' => 'UsersController@showSignUpStep3']);
     Route::post('sign-up/step3', ['as' => 'user.sign-up.step3.store', 'uses' => 'UsersController@postSignUpStep3']);
+
 
 
     /* -------------- GOOGLE OAUTH ROUTES --------------*/

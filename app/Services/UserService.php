@@ -97,6 +97,9 @@ class UserService {
     ---------------------------------
     */
 
+    /**
+     * Authenticate an User into the system using the given credentials
+     */
     public function auth(array $data, bool $rememberUser)
     {
         if(env('PW_CRYPT'))
@@ -134,6 +137,24 @@ class UserService {
                 return ['success' => false];
                 
             }
+        }
+    }
+
+    /**
+     * Clear User session
+     */
+    public function logout()
+    {
+        if(Auth::check())
+        {
+            // Do anything before peforming user logout
+            
+            Auth::logout();
+
+            return [
+                'success' => true,
+                'message' => 'logout'
+            ];
         }
     }
 }

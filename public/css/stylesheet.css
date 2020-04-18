@@ -44,7 +44,8 @@ html {
     --------------------
 */
 
-.link-main {
+.link-main,
+.link-main a {
     color: #fafafa;
 }
 
@@ -70,16 +71,23 @@ html {
 
 /* 
     --------------------
-       Extra
+       Sizing
     --------------------
 */
 
-.img {
+.size-xs {
+    max-width: 50px;
+    max-height: 50px;
+    width: 50px;
+    height: 50px;
+}
+
+.size-logo {
     width: 50%;
     height: 30%;
 }
 
-.img-thumbnail {
+.size-m {
     max-width: 40%;
     width: 40%;
 }

@@ -143,4 +143,23 @@ class UsersController extends Controller
             return redirect()->route('user.login');
         }
     }
+
+    public function doLogout()
+    {
+        if(Auth::check())
+        {
+            $return = $this->service->logout();
+
+            if($return['success'])
+            {
+                return redirect()->route('user.login');
+            }
+            else
+            {
+                return redirect()->route('index', [
+                    'message' => $return['message']
+                ]);
+            }
+        }
+    }
 }

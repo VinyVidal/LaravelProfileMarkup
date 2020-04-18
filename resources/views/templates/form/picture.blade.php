@@ -11,7 +11,7 @@
     @endif
 
     <div class="text-center">
-        <img id="profile-picture" src="{{ $placeholder ?? asset('img/default-avatar.png') }}" alt="default-avatar" class="img-thumbnail {{ $class ?? null }}">
+        <img id="profile-picture" src="{{ $placeholder ?? asset('img/default-avatar.png') }}" alt="default-avatar" class="img-thumbnail size-m {{ $class ?? null }}">
     </div>
 
     {!! Form::file($name, $attributes ?? null) !!}
