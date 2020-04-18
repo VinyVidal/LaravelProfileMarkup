@@ -1,3 +1,20 @@
+{{--
+    Basic input field template
+--}}
+
+{{--                   PARAMETERS 
+  * string   @name -> Name of the html element
+    string   @value -> Field preset value
+    string   @type -> Determine the type attribute of the element, possible values are 'text' or 'email'
+    array    @attributes -> Array of html element | ['attribute' => 'value']
+    string   @label -> Field label text, activates label for the field
+    string   @sub -> Subtitle text for the field
+    string   @subClass -> Subtitle text css class
+    string   @class -> Html element class
+    
+    *required
+--}}
+
 @php
     $attributes['id'] = $attributes['id'] ?? $name;
     if(isset($class))

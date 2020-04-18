@@ -1,3 +1,7 @@
+{{--
+    Template for "logged out" pages, authentication pages (login, register, forgot password, etc)
+--}}
+
 @extends('templates.master')
 
 @section('title')

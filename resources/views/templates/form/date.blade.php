@@ -1,3 +1,18 @@
+{{--
+    Datepicker field template
+--}}
+
+{{--                   PARAMETERS 
+  * string   @name -> Name of the html element
+    array    @attributes -> Array of html element | ['attribute' => 'value']
+    string   @label -> Field label text, activates label for the field
+    string   @sub -> Subtitle text for the field
+    string   @subClass -> Subtitle text css class
+    string   @class -> Html element class
+    
+    *required
+--}}
+
 @php
     $attributes['id'] = $attributes['id'] ?? $name;
     if(isset($class))

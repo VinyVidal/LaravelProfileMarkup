@@ -1,3 +1,19 @@
+{{--
+    Image file selector + image preview template
+--}}
+
+{{--                   PARAMETERS 
+  * string   @name -> Name of the html element
+    string   @placeholder -> Picture to be displayed by default
+    array    @attributes -> Array of html element | ['attribute' => 'value']
+    string   @label -> Field label text, activates label for the field
+    string   @sub -> Subtitle text for the field
+    string   @subClass -> Subtitle text css class
+    string   @class -> CSS class of the picture
+    
+    *required
+--}}
+
 @php
     $attributes['id'] = 'photo';
     $attributes['accept'] = 'image/*';

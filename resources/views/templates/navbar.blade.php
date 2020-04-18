@@ -1,6 +1,10 @@
-{{-- 
-    string @username -> User display name
-    string @useravatar -> User photo path
+{{--
+    Main Navigational Menu template
+--}}
+
+{{--                   PARAMETERS 
+    string @username -> Logged User display name
+    string @useravatar -> Logged User photo path
 --}}
 <nav class="navbar navbar-expand-lg bg-main text-main border-main">
     <a class="navbar-brand" href="#">Brand</a>
