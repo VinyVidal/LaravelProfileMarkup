@@ -23,8 +23,9 @@
     {!! Form::model(session()->get('user'), ['route' => 'user.sign-up.step2.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
     @include('templates.form.picture', ['name' => 'uploadedPhoto', 'label' => 'Escolha uma foto para o seu perfil', 'class' => 'rounded-circle', 'placeholder' => $photo])
     @include('templates.form.textarea', ['name' => 'bio', 'label' => 'Conte-nos mais sobre você', 'rows' => 6])
-    <a href="{{ route('user.sign-up.step1') }}" class="btn btn-secondary">Voltar</a>
+    <a href="{{ route('user.sign-up.step1') }}" class="btn btn-secondary float-left">Voltar</a>
     @include('templates.form.submit', ['name' => 'Continuar', 'class' => 'btn-info float-right'])
+    <div class="clear"></div>
     @include('templates.form.errors', ['fields' => ['uploadedPhoto', 'bio'], 'class' => 'alert alert-danger py-2 my-2'])
     {!! Form::close() !!}
 @endsection

@@ -1,8 +1,49 @@
-body,
-html {
-    height: 100%;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+body {
+    background: #fafafa;
+}
+
+
+/* 
+    --------------------
+       PAGE SPECIFIC
+    --------------------
+*/
+
+
+/* AUTH PAGES */
+
+.auth-container {
+    max-width: 565px;
+}
+
+@media (max-width: 565px) {
+    div.auth-container {
+        border-left-width: 0 !important;
+        border-right-width: 0 !important;
+    }
+}
+
+/* NAVBAR */
+
+nav.navbar {
+    font-size: 30px;
+}
+
+@media (max-width: 576px) {
+    nav.navbar .navbar-brand img{
+        max-width: 50px;
+    }
+
+    nav.navbar {
+        font-size: 18px;
+    }
+}
 
 /* 
     --------------------
@@ -71,6 +112,17 @@ html {
 
 /* 
     --------------------
+       POSITION
+    --------------------
+*/
+
+.clear {
+    clear: both;
+}
+
+
+/* 
+    --------------------
        Sizing
     --------------------
 */
@@ -82,12 +134,40 @@ html {
     height: 50px;
 }
 
+.size-sm {
+    max-width: 75px;
+    width: 100%;
+}
+
 .size-logo {
-    width: 50%;
-    height: 30%;
+    max-width: 100px;
 }
 
 .size-m {
     max-width: 40%;
     width: 40%;
+}
+
+/* 
+    --------------------
+       DEVICE RESPONSIVE
+    --------------------
+*/
+
+.desktop-sm {
+    display: none;
+}
+
+.mobile-sm {
+    display: default;
+}
+
+@media (min-width: 576px) {
+    .desktop-sm {
+        display: block;
+    }
+    .mobile-sm {
+        display: none;
+    }
+
 }

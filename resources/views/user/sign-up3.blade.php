@@ -17,8 +17,9 @@
     @include('templates.form.input', ['name' => 'username', 'label' => 'Nome de usuário'])
     @include('templates.form.password', ['name' => 'password', 'label' => 'Senha'])
     @include('templates.form.password', ['name' => 'confirmPassword', 'label' => 'Confirmar Senha'])
-    <a href="{{ route('user.sign-up.step2') }}" class="btn btn-secondary">Voltar</a>
+    <a href="{{ route('user.sign-up.step2') }}" class="btn btn-secondary float-left">Voltar</a>
     @include('templates.form.submit', ['name' => 'Criar Conta', 'class' => 'btn-info float-right'])
+    <div class="clear"></div>
     @include('templates.form.errors', ['fields' => ['username', 'password', 'confirmPassword'], 'class' => 'alert alert-danger py-2 my-2'])
     {!! Form::close() !!}
 @endsection

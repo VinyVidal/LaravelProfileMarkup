@@ -1,0 +1,23 @@
+
+   Illuminate\Database\QueryException  : could not find driver (SQL: select * from information_schema.tables where table_schema = profile-markup and table_name = migrations and table_type = 'BASE TABLE')
+
+  at /opt/lampp/htdocs/profile-markup/vendor/laravel/framework/src/Illuminate/Database/Connection.php:665
+    661|         // If an exception occurs when attempting to run a query, we'll format the error
+    662|         // message to include the bindings with SQL, which will make this exception a
+    663|         // lot more helpful to the developer instead of just the database's errors.
+    664|         catch (Exception $e) {
+  > 665|             throw new QueryException(
+    666|                 $query, $this->prepareBindings($bindings), $e
+    667|             );
+    668|         }
+    669|
+
+  Exception trace:
+
+  1   PDOException::("could not find driver")
+      /opt/lampp/htdocs/profile-markup/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:70
+
+  2   PDO::__construct()
+      /opt/lampp/htdocs/profile-markup/vendor/laravel/framework/src/Illuminate/Database/Connectors/Connector.php:70
+
+  Please use the argument -v to see more details.
