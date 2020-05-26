@@ -33,6 +33,10 @@ class UserSocialService {
             {
                 $user->photo = Storage::url('images/'.$user->username.'/'.$filename);
             }
+            else
+            {
+                $user->photo = '';
+            }
                 
             $user->setNewPassword();
 
