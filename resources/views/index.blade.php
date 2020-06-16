@@ -5,6 +5,6 @@
 @endsection
 
 @section('content')
-    @include('templates/navbar', ['username' => $user->username, 'useravatar' => $user->photo])
+    @include('navbar', ['username' => $user->username, 'useravatar' => $user->photo])
     <h1>{{ $message ?? 'Seja bem-vindo, '.$user->username.'!' }} </h1>
 @endsection

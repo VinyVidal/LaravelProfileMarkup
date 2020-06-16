@@ -13,7 +13,7 @@ use App\Http\Requests\UserCreateStep2Request;
 use App\Http\Requests\UserCreateRequest;
 
 /**
- * Main Controller
+ * User Flow Controller
  */
 
 class UsersController extends Controller
@@ -102,7 +102,8 @@ class UsersController extends Controller
         if($return['success'])
         {
             session()->put('sign-up_step3', true);
-            return redirect()->route('user.index');
+            Auth::loginUsingId($return['data']->id);
+            return redirect()->route('index');
         }
         else
         {

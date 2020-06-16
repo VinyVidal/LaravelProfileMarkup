@@ -5,21 +5,36 @@ $(document).ready(function() {
         }
     });
 
-    var fileInput = document.getElementById('photo');
+    var context = new PicturePickerContext;
 
-    $('#profile-picture').click(function(e) {
-        $('#photo').click();
+    //fileInput = document.getElementById('photo');
+
+    $('[role=picture-picker]').click(function(e) {
+        context.fileInput = document.getElementById(e.target.id+'Input');
+        context.picture = document.getElementById(e.target.id);
+        console.log(context.picture);
+        $('#'+context.fileInput.id).click();
     });
 
-    $('#photo').change(function(e) {
-        setProfilePicturePreview(fileInput);
+    $('[role=picture-input]').change(function(e) {
+        setProfilePicturePreview(context.picture, context.fileInput);
     });
 
 });
 
-function setProfilePicturePreview(that) {
-    if (that.files && that.files[0]) {
-        $('#profile-picture').attr('src',
-            window.URL.createObjectURL(that.files[0]));
+function setProfilePicturePreview(picture, input) {
+    if (input.files && input.files[0]) {
+        $('#'+picture.id).attr('src',
+            window.URL.createObjectURL(input.files[0]));
     }
+    
+}
+
+// Class used to manipute the picture picker activator
+class PicturePickerContext
+{
+    // Stores the Hidden File input element ID
+    fileInput;
+    // Stores the IMG element on the context
+    picture;
 }

@@ -21,7 +21,7 @@
     </nav>
     {{-- <img src="{{ asset('storage/'.$photo) ?? 'erro' }}"> --}}
     {!! Form::model(session()->get('user'), ['route' => 'user.sign-up.step2.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
-    @include('templates.form.picture', ['name' => 'uploadedPhoto', 'label' => 'Escolha uma foto para o seu perfil', 'class' => 'size-m rounded-circle', 'placeholder' => $photo])
+    @include('templates.form.picture', ['name' => 'uploadedPhoto', 'id' => 'photo', 'label' => 'Escolha uma foto para o seu perfil', 'class' => 'img-thumbnail size-m rounded-circle', 'placeholder' => $photo])
     @include('templates.form.textarea', ['name' => 'bio', 'label' => 'Conte-nos mais sobre você', 'rows' => 6])
     <a href="{{ route('user.sign-up.step1') }}" class="btn btn-secondary float-left">Voltar</a>
     @include('templates.form.submit', ['name' => 'Continuar', 'class' => 'btn-info float-right'])

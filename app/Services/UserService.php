@@ -83,7 +83,8 @@ class UserService {
 
         return [
             'success' => true,
-            'message' => 'Usuário criado com sucesso'
+            'message' => 'Usuário criado com sucesso',
+            'data' => $user
         ];
     }
 

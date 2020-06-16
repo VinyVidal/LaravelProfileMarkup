@@ -4,6 +4,7 @@
 
 {{--                   PARAMETERS 
   * string   @name -> Name of the html element
+  * string   @id -> ID of the html element
     string   @placeholder -> Picture to be displayed by default
     array    @attributes -> Array of html element | ['attribute' => 'value']
     string   @label -> Field label text, activates label for the field
@@ -15,8 +16,10 @@
 --}}
 
 @php
-    $attributes['id'] = 'photo';
+    $attributes['id'] = $id.'Input';
+    $attributes['class'] = $attributes['class'] ?? 'hidden';
     $attributes['accept'] = 'image/*';
+    $attributes['role'] = 'picture-input'
     
 @endphp
 
@@ -27,7 +30,7 @@
     @endif
 
     <div class="text-center">
-        <img id="profile-picture" src="{{ $placeholder ?? asset('img/default-avatar.png') }}" alt="default-avatar" class="img-thumbnail {{ $class ?? null }}">
+        <img id="{{ $id }}" src="{{ $placeholder ?? asset('img/default-avatar.png') }}" alt="default-avatar" role="picture-picker" class="img {{ $class ?? null }}">
     </div>
 
     {!! Form::file($name, $attributes ?? null) !!}

@@ -16,6 +16,13 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', ['as' => 'index', 'middleware' => 'auth', 'uses' => 'Controller@index']);
 
+    /* -------------- USER OWN PROFILE --------------*/
+    Route::get('/profile', ['as' => 'user.profile', 'uses' => 'ProfileController@index']);
+    Route::get('/profile/activity', ['as' => 'user.profile.activity', 'uses' => 'ProfileController@index']);
+    Route::get('/profile/about', ['as' => 'user.profile.about', 'uses' => 'ProfileController@showAbout']);
+    Route::get('/profile/friends', ['as' => 'user.profile.friends', 'uses' => 'ProfileController@showFriends']);
+    //Route::get('/profile/edit', ['as' => 'user.profile.config', 'uses' => 'ProfileController@showConfig']);
+
     /* -------------- USER LOGOUT --------------*/
     Route::get('/logout', ['as' => 'user.logout', 'uses' => 'UsersController@doLogout']);
 });

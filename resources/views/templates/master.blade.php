@@ -13,7 +13,7 @@
 
     <title>@yield('title') | Profile Markup</title>
   </head>
-  <body>
+  <body class="bg-lgray">
     <!-- page content -->
     @yield('content')
 

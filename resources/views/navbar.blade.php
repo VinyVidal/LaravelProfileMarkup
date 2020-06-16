@@ -1,5 +1,5 @@
 {{--
-    Main Navigational Menu template
+    Main Navigational Menu view
 --}}
 
 {{--                   PARAMETERS 
@@ -23,10 +23,10 @@
         {{-- Profile Menu MOBILE --}}
         <li class="nav-item mobile-sm">
           <a class="nav-link" data-toggle="collapse" href="#profileMobileCollapse" aria-expanded="false" aria-controls="profileMobileCollapse">
-            Minha Conta - {{ $username }} 
+            Minha Conta - {{ $username ?? 'null' }} 
           </a>
           <div class="collapse" id="profileMobileCollapse">
-            <a class="dropdown-item" href="#">Meu Perfil</a>
+            <a class="dropdown-item" href="{{ route('user.profile') }}">Meu Perfil</a>
           <a class="dropdown-item" href="#">Configurações</a>
           <a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a>
           </div>
@@ -43,7 +43,7 @@
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbar-useravatar">
           <h5 class="ml-3">{{ $username ?? 'user' }}</h5>
           <hr>
-          <a class="dropdown-item" href="#">Meu Perfil</a>
+          <a class="dropdown-item" href="{{ route('user.profile') }}">Meu Perfil</a>
           <a class="dropdown-item" href="#">Configurações</a>
           <a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a>
         </div><!-- dropdown-menu -->
