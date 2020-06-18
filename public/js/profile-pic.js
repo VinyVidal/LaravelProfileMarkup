@@ -1,3 +1,9 @@
+// Script for showing profile picture preview images after user selects an image file
+//
+// Usage: just need to include the templates/form/picture.blade.php view,
+// everything there is ready for use. Remember to pass an unique ID value when including
+// the view as this is needed to the code to function correctly.
+
 $(document).ready(function() {
     $.ajaxSetup({
         headers: {
@@ -33,7 +39,7 @@ function setProfilePicturePreview(picture, input) {
 // Class used to manipute the picture picker activator
 class PicturePickerContext
 {
-    // Stores the Hidden File input element ID
+    // Stores the Hidden File input element
     fileInput;
     // Stores the IMG element on the context
     picture;

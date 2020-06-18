@@ -32,13 +32,23 @@ body {
 /* NAVBAR */
 
 nav.navbar {
-    font-size: 30px;
+    font-size: 20px;
+    
+}
+
+.navbar-brand img {
+    max-height: 50px;
+    width: auto;
+}
+
+.navbar-nav a:hover{
+    text-decoration: underline;
 }
 
 @media (max-width: 576px) {
-    nav.navbar .navbar-brand img{
-        max-width: 50px;
-    }
+    /* nav.navbar .navbar-brand img{
+        
+    } */
 
     nav.navbar {
         font-size: 18px;
@@ -165,7 +175,7 @@ nav.navbar {
 }
 
 .link-body-underline:hover {
-    text-decoration: underline #121212;
+    text-decoration: underline;
 }
 
 /* 
@@ -235,6 +245,8 @@ nav.navbar {
     max-width: 200px;
     max-height: 200px;
 }
+
+
 
 .size-rectangle-m {
     width: 100%;
