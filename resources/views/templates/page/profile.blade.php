@@ -16,7 +16,7 @@
 
     {{-- Edit Profile Modal --}}
     <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModal" aria-hidden="true">
-        <div class="modal-dialog">
+        <div class="modal-dialog m-0 mx-md-auto my-md-4">
           <div class="modal-content">
             <div class="modal-header">
               <h3 class="modal-title">Editar Perfil</h3>
@@ -24,9 +24,9 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body ">
             
-                    <h4 class="modal-title mb-2">Foto de Perfil</h4>
+                    <h4 class="modal-title mb-1 mb-2">Foto de Perfil</h4>
                     {{-- avatar picker --}}
                     @include('templates.form.picture', ['name' => 'uploadedPhoto', 'id' => 'photo', 'class' => 'img-thumbnail size-m rounded-circle', 'placeholder' => $user->photo])
 
@@ -61,7 +61,7 @@
 
         <div class="container my-3">
             <div class="row">
-                <div class="col h-100 col-md-3 bg-light mr-5 px-0">
+                <div class="h-100 col-md-3 bg-light mr-md-5 px-0">
                   <h4 class="text-center my-0 border-bottom border-main bg-main text-main py-2">Navegação</h4>
                     <ul class="nav flex-column profile-nav">
                         <li class="nav-item">
@@ -78,7 +78,7 @@
                         </li>
                       </ul><!-- profile-nav -->
                 </div><!-- col -->
-                <div id="profile-content" scrollTo class="col ml-5 bg-light p-0 rounded">
+                <div id="profile-content" scrollTo class="col-md ml-md-5 mt-3 mt-md-0 bg-light p-0 rounded">
                     @yield('inner-content')
                 </div><!-- col -->
             </div><!-- row -->

@@ -6,7 +6,7 @@
 
 @section('inner-content')
     <h4 class="text-center mt-0 border-bottom border-main bg-main text-main py-2">Atividade Recente</h4>
-    <div class="px-5 py-2">
+    <div class="px-0 px-md-3 py-2">
         <div class="post border p-3">
             <div class="post-header">
                 <div class="post-avatar"><img src="{{ asset('img/default-avatar.png') }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div><div class="post-author link-body-underline font-weight-bold"> User FullName </div>
