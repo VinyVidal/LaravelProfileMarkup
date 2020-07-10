@@ -76,6 +76,10 @@ class UserService {
             Storage::disk('public')->move($user->photo, 'images/'.$user->username.'/'.$filename);
             $user->photo = Storage::url('images/'.$user->username.'/'.$filename);
         }
+        else
+        {
+            $user->photo = asset('img/default-avatar.png');
+        }
 
         $user->save();
 
@@ -88,7 +92,42 @@ class UserService {
         ];
     }
 
-    public function update(int $id, array $data){}
+    /* 
+    -----------------------
+       USER UPDATE
+    -----------------------
+    */
+
+    /**
+     * Update user information
+     */
+    public function update(int $id, array $data)
+    {
+        $user = User::find($id);
+        $user->fill($data); // Update bio
+
+        // Update photo
+        if(isset($data['uploadedPhoto']))
+        {
+            Storage::disk('public')->delete( str_replace('/storage/', '', $user->photo) );
+            $user->photo = Storage::url(Storage::disk('public')->putFile('images/'.$user->username, $data['uploadedPhoto']));
+        }
+
+        // Update cover
+        if(isset($data['uploadedCover']))
+        {
+            Storage::disk('public')->delete( str_replace('/storage/', '', $user->cover) );
+            $user->cover = Storage::url(Storage::disk('public')->putFile('images/'.$user->username, $data['uploadedCover']));
+        }
+        
+        $user->save();
+
+        return [
+            'success' => true,
+            'message' => 'Dados atualizados com sucesso',
+            'data' => $user
+        ];
+    }
 
     public function delete(int $id){}
 

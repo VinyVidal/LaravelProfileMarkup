@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use App\Http\Requests\UserProfileUpdateRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Entities\User;
+use App\Services\UserService;
 
 /**
  * User Profile Page flow Controller
@@ -17,9 +19,9 @@ class ProfileController extends Controller
     use ValidatesRequests;
     //private $service;
 
-    public function __construct()
+    public function __construct(UserService $userService)
     {
-        //$this->service = $service;
+        $this->userService = $userService;
     }
 
     /**
@@ -50,5 +52,29 @@ class ProfileController extends Controller
         return view('user.profile.friends', [
             'user' => Auth::user(),
         ]);
+    }
+
+    /**
+     * Update user profile details
+     */
+    public function update(UserProfileUpdateRequest $request)
+    {
+        $data = $request->all();
+        $return = $this->userService->update(Auth::user()->id, $data);
+
+        if($return['success'])
+        {
+            return redirect()->back()->with([
+                'success' => true,
+                'profile_edit_message' => $return['message'],
+            ]);
+        }
+        else
+        {
+            return redirect()->back()->with([
+                'success' => false,
+                'profile_edit_message' => $return['message'],
+            ]);
+        }
     }
 }

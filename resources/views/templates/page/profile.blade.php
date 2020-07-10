@@ -13,6 +13,7 @@
 @endsection
 
 @section('content')
+{{-- <script>alert("{{ session()->get('message') }}");</script> --}}
 
     {{-- Edit Profile Modal --}}
     <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModal" aria-hidden="true">
@@ -24,23 +25,30 @@
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <div class="modal-body ">
+            <div class="modal-body">
             
-                    <h4 class="modal-title mb-1 mb-2">Foto de Perfil</h4>
-                    {{-- avatar picker --}}
-                    @include('templates.form.picture', ['name' => 'uploadedPhoto', 'id' => 'photo', 'class' => 'img-thumbnail size-m rounded-circle', 'placeholder' => $user->photo])
+              {!! Form::model(session()->get('user'), ['route' => 'user.profile.edit', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+              <h4 class="modal-title mb-1 mb-2">Foto de Perfil</h4>
+              {{-- avatar picker --}}
+              @include('templates.form.picture', ['name' => 'uploadedPhoto', 'id' => 'photo', 'class' => 'img-thumbnail size-m rounded-circle', 'placeholder' => $user->photo ?? asset('img/default-avatar.png')])
 
-                <h4 class="modal-title mb-2">Foto de Capa</h4>
-                    {{-- cover picker --}}
-                    @include('templates.form.picture', ['name' => 'uploadedCover', 'id' => 'cover', 'class' => 'size-rectangle-m border rounded bg-cover', 'placeholder' => $user->cover ?? asset('img/default-cover.png')])
+              <h4 class="modal-title mb-2">Foto de Capa</h4>
+                  {{-- cover picker --}}
+                  @include('templates.form.picture', ['name' => 'uploadedCover', 'id' => 'cover', 'class' => 'size-rectangle-m border rounded bg-cover', 'placeholder' => $user->cover ?? asset('img/default-cover.png')])
 
-                <h4 class="modal-title mb-2">Biografia/Apresentação</h4>
-                @include('templates.form.textarea', ['name' => 'bio', 'rows' => 6, 'value' => $user->bio])
+              <h4 class="modal-title mb-2">Biografia/Apresentação</h4>
+              @include('templates.form.textarea', ['name' => 'bio', 'rows' => 6, 'value' => $user->bio ?? "", 'attributes' => ['placeholder' => 'Escreva sua apresentação...']])
+
+              {{-- <div class="alert alert-success" role="alert">
+                A simple success alert—check it out!
+              </div> --}}
 
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-              <button type="button" class="btn btn-primary">Salvar Alterações</button>
+              @include('templates.form.submit', ['name' => 'Salvar Alterações', 'class' => 'btn-primary'])
+              {!! Form::close() !!}
+              {{-- TODO: profile edit back-end --}}
             </div>
           </div>
         </div>
@@ -48,9 +56,9 @@
     
     @include('navbar', ['username' => $user->username  ?? null , 'useravatar' => $user->photo  ?? null ])
     <div class="profile-page">
-        <div class="profile-background">
+      <div class="profile-background" style="background-image: url('{{ $user->cover }}');">
             <div class="profile-avatar-container">
-                <img src="{{ $user->photo ?? asset('img/default-avatar.png') }}" alt="Foto de Perfil" class="img-thumbnail rounded-circle">
+                <img src="{{ $user->photo ?? asset('img/default-avatar.png') ?? asset('img/default-avatar.png') }}" alt="Foto de Perfil" class="img-thumbnail rounded-circle">
                 <h2 class="mt-3">{{ $user->fullName  ?? 'null'  }}</h2>
                 <div class="action-buttons">
                     <button class="btn btn-primary" data-toggle="modal" data-target="#editProfileModal"><i class="fas fa-edit"></i> Editar Perfil</button>

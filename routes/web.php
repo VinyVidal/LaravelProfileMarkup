@@ -21,7 +21,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile/activity', ['as' => 'user.profile.activity', 'uses' => 'ProfileController@index']);
     Route::get('/profile/about', ['as' => 'user.profile.about', 'uses' => 'ProfileController@showAbout']);
     Route::get('/profile/friends', ['as' => 'user.profile.friends', 'uses' => 'ProfileController@showFriends']);
-    //Route::get('/profile/edit', ['as' => 'user.profile.config', 'uses' => 'ProfileController@showConfig']);
+    Route::post('/profile/edit', ['as' => 'user.profile.edit', 'uses' => 'ProfileController@update']);
 
     /* -------------- USER LOGOUT --------------*/
     Route::get('/logout', ['as' => 'user.logout', 'uses' => 'UsersController@doLogout']);
