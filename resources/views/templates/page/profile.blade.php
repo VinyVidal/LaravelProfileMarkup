@@ -48,7 +48,6 @@
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
               @include('templates.form.submit', ['name' => 'Salvar Alterações', 'class' => 'btn-primary'])
               {!! Form::close() !!}
-              {{-- TODO: profile edit back-end --}}
             </div>
           </div>
         </div>
@@ -68,6 +67,18 @@
         
 
         <div class="container my-3">
+            <div class="row">
+              <div class="col">
+                @if (session('message'))
+                    <div class="alert alert-success" role="alert">
+                      {{ session('message') }}
+                      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                  @endif
+              </div>
+            </div>
             <div class="row">
                 <div class="h-100 col-md-3 bg-light mr-md-5 px-0">
                   <h4 class="text-center my-0 border-bottom border-main bg-main text-main py-2">Navegação</h4>
@@ -96,6 +107,7 @@
 
 @section('additional-js')
     <script src="{{ asset('js/profile-pic.js') }}"></script>
+    <script src="{{ asset('js/file-input.js') }}"></script>
     @if (Route::currentRouteName() != 'user.profile')
       <script src="{{ asset('js/scrollToElement.js') }}"></script>
     @endif

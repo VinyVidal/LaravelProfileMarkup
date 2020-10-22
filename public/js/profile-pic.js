@@ -18,7 +18,6 @@ $(document).ready(function() {
     $('[role=picture-picker]').click(function(e) {
         context.fileInput = document.getElementById(e.target.id+'Input');
         context.picture = document.getElementById(e.target.id);
-        console.log(context.picture);
         $('#'+context.fileInput.id).click();
     });
 

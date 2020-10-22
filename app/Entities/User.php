@@ -5,11 +5,13 @@ namespace App\Entities;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 
 class User extends Authenticatable
 {
     use Notifiable;
+    use SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -29,9 +31,25 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
+    /**
+     * Returns the social media connections the user have
+     */
     public function socials()
     {
         return $this->hasMany(UserSocial::class);
+    }
+
+    /**
+     * Returns all the posts the user created
+     */
+    public function posts()
+    {
+        return $this->hasMany(Post::class) ?? null;
+    }
+
+    public function getListPostsAttribute()
+    {
+        return $this->listPosts = $this->posts()->orderBy('created_at', 'desc')->get();
     }
 
     /**

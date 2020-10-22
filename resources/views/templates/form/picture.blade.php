@@ -1,5 +1,5 @@
 {{--
-    Image file selector + image preview template
+    Image file selector + image preview template, must include the profile-pic.js script to function
 --}}
 
 {{--                   PARAMETERS 

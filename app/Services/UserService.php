@@ -49,7 +49,7 @@ class UserService {
 
         if(isset($data['uploadedPhoto']))
         {
-            $user->photo = Storage::disk('public')->putFile('images/temp', $data['uploadedPhoto']);
+            $user->photo = Storage::disk('public')->putFile('users/temp', $data['uploadedPhoto']);
         }
 
         $user->fill($data);
@@ -73,8 +73,8 @@ class UserService {
         {
             $paths = explode('/', $user->photo);
             $filename = end($paths);
-            Storage::disk('public')->move($user->photo, 'images/'.$user->username.'/'.$filename);
-            $user->photo = Storage::url('images/'.$user->username.'/'.$filename);
+            Storage::disk('public')->move($user->photo, 'users/'.$user->username.'/'.$filename);
+            $user->photo = Storage::url('users/'.$user->username.'/'.$filename);
         }
         else
         {
@@ -110,14 +110,14 @@ class UserService {
         if(isset($data['uploadedPhoto']))
         {
             Storage::disk('public')->delete( str_replace('/storage/', '', $user->photo) );
-            $user->photo = Storage::url(Storage::disk('public')->putFile('images/'.$user->username, $data['uploadedPhoto']));
+            $user->photo = Storage::url(Storage::disk('public')->putFile('users/'.$user->username, $data['uploadedPhoto']));
         }
 
         // Update cover
         if(isset($data['uploadedCover']))
         {
             Storage::disk('public')->delete( str_replace('/storage/', '', $user->cover) );
-            $user->cover = Storage::url(Storage::disk('public')->putFile('images/'.$user->username, $data['uploadedCover']));
+            $user->cover = Storage::url(Storage::disk('public')->putFile('users/'.$user->username, $data['uploadedCover']));
         }
         
         $user->save();

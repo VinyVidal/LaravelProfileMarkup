@@ -66,14 +66,14 @@ class ProfileController extends Controller
         {
             return redirect()->back()->with([
                 'success' => true,
-                'profile_edit_message' => $return['message'],
+                'message' => $return['message'],
             ]);
         }
         else
         {
             return redirect()->back()->with([
                 'success' => false,
-                'profile_edit_message' => $return['message'],
+                'message' => $return['message'],
             ]);
         }
     }
