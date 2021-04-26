@@ -34,7 +34,6 @@ class PostService {
         $post = Post::find($id);
         $post->fill($data);
 
-        dd($data['uploadedMedia']);
         if(isset($data['uploadedMedia']))
         {
             Storage::disk('public')->delete( str_replace('/storage/', '', $post->attachment) );

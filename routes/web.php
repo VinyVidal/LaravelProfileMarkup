@@ -17,6 +17,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', ['as' => 'index', 'middleware' => 'auth', 'uses' => 'Controller@index']);
     /* -------------- POSTS --------------*/
     Route::post('/post/new', ['as' => 'post.store', 'uses' => 'PostsController@store']);
+    Route::post('/post/update/{id}', ['as' => 'post.update', 'uses' => 'PostsController@update']);
 
     /* -------------- USER OWN PROFILE --------------*/
     Route::get('/profile', ['as' => 'user.profile', 'uses' => 'ProfileController@index']);
