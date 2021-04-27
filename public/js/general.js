@@ -12,7 +12,7 @@ function triggerClickEvent()
 {
     if($('trigger[click]').length) {
         let trigger = $('trigger[click]');
-        let button = $('#' + trigger.attr('click'))
+        let button = $('#' + trigger.attr('click'));
         button.click();
     }
 }

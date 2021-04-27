@@ -22,8 +22,8 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="post{{ $post->id }}ThreeDotsDropdown">
                 @if ($user->id === Auth::user()->id)
-                    <a class="dropdown-item" data-toggle="modal" data-target="#editPostb{{ $post->id }}Modal" href="#">Editar Publicação</a>
-                    <a class="dropdown-item" data-toggle="modal" data-target="#removePostb{{ $post->id }}Modal" href="#">Remover Publicação</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#editPostb{{ $post->id }}Modal" href="#">Editar</a>
+                    <button class="dropdown-item" data-confirm="Atenção||Deseja mesmo remover a postagem? Essa ação é irreversível!" data-url="{{ route('post.delete', [$post->id]) }}" data-class="text-danger">Remover</button>
                 @endif
               </div>
         </div>
