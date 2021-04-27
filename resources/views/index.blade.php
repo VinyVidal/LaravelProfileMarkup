@@ -1,11 +1,10 @@
-@extends('templates/master')
+@extends('templates/page/default')
 
 @section('title')
     Titulo
 @endsection
 
-@section('content')
-    @include('navbar', ['username' => $user->username, 'useravatar' => $user->photo])
+@section('inner-content')
     @if (session('message'))
     <div class="alert alert-success" role="alert">
         {{ session('message') }}
@@ -14,10 +13,8 @@
         </button>
     </div>
     @endif
-    <h1>{{ $message ?? 'Seja bem-vindo, '.$user->username.'!' }} </h1>
-    @include('post.create')
-@endsection
-
-@section('additional-js')
-    <script src="{{ asset('js/file-input.js') }}"></script>
+    <div class="p-3">
+        <h1>{{ $message ?? 'Seja bem-vindo, '.$user->username.'!' }} </h1>
+        @include('post.create')
+    </div>
 @endsection
