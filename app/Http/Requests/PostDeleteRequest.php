@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use App\Entities\Post;
 
-class PostUpdateRequest extends FormRequest
+class PostDeleteRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,9 +25,7 @@ class PostUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required|string|max:500',
-            'attachment' => 'nullable|file',
-            'visibility' => 'required|integer'
+            //
         ];
     }
 }

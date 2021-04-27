@@ -21,7 +21,10 @@
                 <i class="fas fa-ellipsis-v"></i>
             </a>
             <div class="dropdown-menu" aria-labelledby="post{{ $post->id }}ThreeDotsDropdown">
-                <a class="dropdown-item" data-toggle="modal" data-target="#editPostb{{ $post->id }}Modal" href="#">Editar Publicação</a>
+                @if ($user->id === Auth::user()->id)
+                    <a class="dropdown-item" data-toggle="modal" data-target="#editPostb{{ $post->id }}Modal" href="#">Editar Publicação</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#removePostb{{ $post->id }}Modal" href="#">Remover Publicação</a>
+                @endif
               </div>
         </div>
     </div><!--post-header-->
