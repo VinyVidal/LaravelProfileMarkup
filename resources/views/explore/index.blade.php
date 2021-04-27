@@ -1,7 +1,7 @@
 @extends('templates/page/default')
 
 @section('title')
-    Início
+    Explorar
 @endsection
 
 @section('inner-content')
@@ -14,7 +14,6 @@
     </div>
     @endif
     <div class="p-3">
-        <h2 class="pl-md-4 mb-md-3">{{ $message ?? 'Seja bem-vindo, '.$user->username.'!' }} </h2>
-        @include('post.create')
+        <h2 class="pl-md-4 mb-md-3">Encontre novos contatos!</h2>
     </div>
 @endsection

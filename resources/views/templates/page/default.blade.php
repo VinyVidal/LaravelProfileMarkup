@@ -14,7 +14,7 @@
 
 @section('content')
     
-    @include('navbar', ['username' => $user->username  ?? null , 'useravatar' => $user->photo  ?? null ])
+    @include('navbar', ['username' => Auth::user()->username  ?? null , 'useravatar' => Auth::user()->photo  ?? null ])
       <div class="container my-3">
           <div class="row">
             <div class="col">
@@ -29,7 +29,7 @@
             </div>
           </div>
           <div class="row">
-              <div class="col-md ml-md-5 mt-3 mt-md-0 bg-light p-0 rounded">
+              <div class="col-md mt-3 mt-md-0 bg-light p-0 rounded">
                   @yield('inner-content')
               </div><!-- col -->
           </div><!-- row -->
