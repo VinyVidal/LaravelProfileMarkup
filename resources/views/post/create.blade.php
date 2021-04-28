@@ -15,7 +15,7 @@
     
     *required
 --}}
-@if (count($errors) > 0)
+@if (count($errors->post_create) > 0)
     <trigger click="PostModalButton" />
 @endif
 {{-- Create Post Modal --}}
@@ -43,7 +43,7 @@
 
             @include('templates.form.hidden', ['name' => 'user_id', 'value' => $user->id ])
             
-            @include('templates.form.errors', ['fields' => ['visibility', 'uploadedMedia', 'text', 'user_id'], 'class' => 'alert alert-danger py-2 my-2'])
+            @include('templates.form.errors', ['fields' => ['visibility', 'uploadedMedia', 'text', 'user_id'], 'class' => 'alert alert-danger py-2 my-2', 'bag' => 'post_create'])
             
 
         </div>

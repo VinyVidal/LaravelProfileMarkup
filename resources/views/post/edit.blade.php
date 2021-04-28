@@ -7,7 +7,6 @@
     
     *required
 --}}
-
 <div class="modal fade" id="editPostb{{ $post->id }}Modal" tabindex="-1" role="dialog" aria-labelledby="editPostb{{ $post->id }}Modal" aria-hidden="true">
     <div class="modal-dialog m-0 mx-md-auto my-md-4">
         <div class="modal-content">
@@ -30,7 +29,7 @@
                 @include('templates.form.file', ['name' => 'uploadedMedia', 'id' => 'post'.$post->id.'Media', 'customButton' => ['class' => 'btn fas fa-photo-video text-success clickable-lgray', 'value' => ' Foto/Vídeo']])
             </div>
             
-            @include('templates.form.errors', ['fields' => ['visibility', 'uploadedMedia', 'text', 'user_id'], 'class' => 'alert alert-danger py-2 my-2'])
+            @include('templates.form.errors', ['fields' => ['visibility', 'uploadedMedia', 'text', 'user_id'], 'class' => 'alert alert-danger py-2 my-2', 'bag' => 'post_update'])
             
 
         </div>

@@ -64,6 +64,11 @@ class PostsController extends Controller
                 'success' => true,
                 'message' => 'Publicação editada com sucesso!',
             ]);
+        } else {
+            return redirect()->back()->with([
+                'success' => false,
+                'message' => $return['message'],
+            ]);
         }
     }
 
@@ -79,6 +84,11 @@ class PostsController extends Controller
             return redirect()->back()->with([
                 'success' => true,
                 'message' => 'Publicação removida com sucesso!',
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'success' => false,
+                'message' => $return['message'],
             ]);
         }
     }
