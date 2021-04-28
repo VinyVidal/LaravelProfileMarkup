@@ -18,7 +18,7 @@
         </div>
         <div class="modal-body">
         
-            {!! Form::model($post, ['route' => ['post.update', $post->id], 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
+            {!! Form::model($post, ['route' => ['post.update', $post->id], 'method' => 'post', 'enctype' => 'multipart/form-data', 'name' => 'post-update-form-'.$post->id]) !!}
 
             @include('templates.form.select', ['name' => 'visibility', 'value' => [0 => 'Visível para todos', 1 => 'Somente eu']])
             @include('templates.form.textarea', ['name' => 'text', 'rows' => 6, 'attributes' => ['placeholder' => 'Escreva algo para a sua publicação...']])
@@ -29,7 +29,7 @@
                 @include('templates.form.file', ['name' => 'uploadedMedia', 'id' => 'post'.$post->id.'Media', 'customButton' => ['class' => 'btn fas fa-photo-video text-success clickable-lgray', 'value' => ' Foto/Vídeo']])
             </div>
             
-            @include('templates.form.errors', ['fields' => ['visibility', 'uploadedMedia', 'text', 'user_id'], 'class' => 'alert alert-danger py-2 my-2', 'bag' => 'post_update'])
+            @include('templates.form.errors', ['fields' => ['visibility', 'uploadedMedia', 'text', 'user_id'], 'class' => 'alert alert-danger py-2 my-2', 'bag' => 'post_update'.$post->id])
             
 
         </div>

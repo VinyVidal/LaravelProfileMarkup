@@ -8,10 +8,7 @@ use App\Rules\Media;
 
 class PostUpdateRequest extends FormRequest
 {
-    public function __construct()
-    {
-        $this->errorBag = 'post_update';
-    }
+    protected $errorBag = 'post_update';
 
     /**
      * Determine if the user is authorized to make this request.
@@ -20,6 +17,7 @@ class PostUpdateRequest extends FormRequest
      */
     public function authorize()
     {
+        $this->errorBag = 'post_update'.$this->route('id');
         $post = Post::find($this->route('id'));
         return $post->user_id === $this->user()->id;
     }

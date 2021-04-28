@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Entities\Post;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PostDeleteRequest extends FormRequest

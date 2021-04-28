@@ -10,9 +10,10 @@
 
 @php
     $user = $post->user;
+    $errorBagName = 'post_update'.$post->id;
 @endphp
-@if (count($errors->post_update) > 0)
-    <trigger click="postModalEditButton" />
+@if (count($errors->$errorBagName) > 0)
+    <trigger click="postModalEditButton{{ $post->id }}" />
 @endif
 
 <div class="post border p-3" style="position: relative;">
@@ -25,7 +26,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="post{{ $post->id }}ThreeDotsDropdown">
                 @if ($user->id === Auth::user()->id)
-                    <a class="dropdown-item" data-toggle="modal" id="postModalEditButton" data-target="#editPostb{{ $post->id }}Modal" href="#">Editar</a>
+                    <a class="dropdown-item" data-toggle="modal" id="postModalEditButton{{ $post->id }}" data-target="#editPostb{{ $post->id }}Modal" href="#">Editar</a>
                     <button class="dropdown-item" data-confirm="Atenção||Deseja mesmo remover a postagem? Essa ação é irreversível!" data-url="{{ route('post.delete', [$post->id]) }}" data-class="text-danger">Remover</button>
                 @endif
               </div>
