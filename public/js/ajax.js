@@ -1,9 +1,10 @@
-function AJAXrequest(url, postedData, callback) {
+function AJAXrequest(url, postedData, callback, type = 'POST', dataType = 'json') {
     $.ajax({
-        type: 'POST',
+        type: type,
         url: url,
         data: postedData,
-        dataType: 'json',
-        success: callback
+        dataType: dataType,
+        success: callback,
+        error: function(jqXHR, textStatus) {console.log(jqXHR.responseText)}
     });
 }

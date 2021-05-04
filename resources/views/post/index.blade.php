@@ -13,7 +13,10 @@
     $errorBagName = 'post_update'.$post->id;
 @endphp
 @if (count($errors->$errorBagName) > 0)
-    <trigger click="postModalEditButton{{ $post->id }}" />
+    <div class="d-none" id="errors">
+        @include('templates.form.errors', ['fields' => ['visibility', 'uploadedMedia', 'text', 'user_id'], 'class' => 'alert alert-danger py-2 my-2', 'bag' => 'post_update'.$post->id])
+    </div>
+    <trigger click="postModalEditButton{{ $post->id }}" function="loadEditModalContent" function-args="{{ route('post.edit', ['id' => $post->id]) }}" />
 @endif
 
 <div class="post border p-3" style="position: relative;">
@@ -26,7 +29,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="post{{ $post->id }}ThreeDotsDropdown">
                 @if ($user->id === Auth::user()->id)
-                    <a class="dropdown-item" data-toggle="modal" id="postModalEditButton{{ $post->id }}" data-target="#editPostb{{ $post->id }}Modal" href="#">Editar</a>
+                    <a class="dropdown-item" data-toggle="modal" id="postModalEditButton{{ $post->id }}" data-id="{{ $post->id }}" data-url="{{ route('post.edit', ['id' => $post->id]) }}" data-target="#editPostModal" href="#">Editar</a>
                     <button class="dropdown-item" data-confirm="Atenção||Deseja mesmo remover a postagem? Essa ação é irreversível!" data-url="{{ route('post.delete', [$post->id]) }}" data-class="text-danger">Remover</button>
                 @endif
               </div>
@@ -73,5 +76,3 @@
         </div><!-- collapse -->
     </div><!--post-footer-->
 </div><!--post-->
-
-@include('post.edit')

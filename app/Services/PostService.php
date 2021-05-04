@@ -67,4 +67,24 @@ class PostService {
             return Response::handle($ex);
         }
     }
+
+    public function ajaxEdit(array $data)
+    {
+        try {
+            $post = Post::find($data['id'] ?? 0);
+            if(!$post) {
+                throw new Exception('Post not found');
+            }
+
+            $view = view('post.edit-form', [
+                'post' => $post
+            ])->render();
+            return [
+                'success' => true,
+                'data' => $view
+            ];
+        } catch (Exception $ex) {
+            return Response::handle($ex);
+        }
+    }
 }

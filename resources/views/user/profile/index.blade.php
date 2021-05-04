@@ -8,6 +8,7 @@
     <h4 class="text-center mt-0 border-bottom border-main bg-main text-main py-2">Atividade Recente</h4>
     <div class="px-0 px-md-3 py-2">
         @include('post.create', ['user' => $user])
+        @include('post.edit')
 
         {{-- Post listing --}}
         @foreach ($user->listPosts as $post)

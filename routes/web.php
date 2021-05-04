@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
     /* -------------- POSTS --------------*/
     Route::post('/post/new', ['as' => 'post.store', 'uses' => 'PostsController@store']);
     Route::post('/post/update/{id}', ['as' => 'post.update', 'uses' => 'PostsController@update']);
+    Route::get('/post/edit', ['as' => 'post.edit', 'uses' => 'PostsController@ajaxEdit']);
     Route::get('/post/delete/{id}', ['as' => 'post.delete', 'uses' => 'PostsController@delete']);
 
     /* -------------- USER OWN PROFILE --------------*/

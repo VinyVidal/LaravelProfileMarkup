@@ -8,6 +8,8 @@ use App\Entities\Post;
 use App\Services\PostService;
 use App\Http\Requests\PostCreateRequest;
 use App\Http\Requests\PostUpdateRequest;
+use Exception;
+use Facade\FlareClient\View;
 
 class PostsController extends Controller
 {
@@ -90,6 +92,17 @@ class PostsController extends Controller
                 'success' => false,
                 'message' => $return['message'],
             ]);
+        }
+    }
+
+    public function ajaxEdit(Request $request) {
+        $return = $this->service->ajaxEdit(['id' => $request->input('id')]);
+        if($return['success']) {
+            return response()->json([
+                'view' => $return['data']   
+            ]);
+        } else {
+            return response()->json($return['message'], 500);
         }
     }
 }
