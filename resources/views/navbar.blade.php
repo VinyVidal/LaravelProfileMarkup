@@ -29,7 +29,7 @@
           <div class="collapse" id="profileMobileCollapse">
             <a class="dropdown-item" href="{{ route('user.profile') }}">Meu Perfil</a>
           <a class="dropdown-item" href="#">Configurações</a>
-          <a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a>
+          <a class="dropdown-item" href="{{ route('user.logout') }}">Sair</a>
           </div>
         </li>
         {{-- Profile Menu MOBILE --}}

@@ -11,9 +11,13 @@
         @include('post.edit')
 
         {{-- Post listing --}}
-        @foreach ($user->listPosts as $post)
-            @include('post.index', ['post' => $post])
-        @endforeach
+        @if ((count($posts) > 0))
+            @foreach ($posts as $post)
+                @include('post.index', ['post' => $post])
+            @endforeach
+        @else
+            Nenhuma atividade
+        @endif
     </div>
     
 @endsection

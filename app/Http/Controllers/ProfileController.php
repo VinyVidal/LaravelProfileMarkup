@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Post;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use App\Http\Requests\UserProfileUpdateRequest;
 use Illuminate\Http\Request;
@@ -31,6 +32,7 @@ class ProfileController extends Controller
     {
         return view('user.profile.index', [
             'user' => Auth::user(),
+            'posts' => Post::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get()
         ]);
     }
 
