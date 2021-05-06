@@ -1,4 +1,3 @@
-FIXME: Make just one modal for user post editting (data-* jquery) which should implove validation error handling as well
 TODO: Post Likes, comments, visibility
 TODO: Index -> see posts from followed users
 TODO: User profile -> See created/liked/commented/mentioned posts

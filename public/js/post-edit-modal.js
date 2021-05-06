@@ -7,7 +7,6 @@ $(document).ready(function () {
     
         loadEditModalContent(url, null);
     })
-    // TODO Transform above code in a function and call that function dynamically in the <trigger> script
 
     $('#editPostModal').on('hidden.bs.modal', function (ev) {
         $('#editPostModalContent').html('Carregando...');
