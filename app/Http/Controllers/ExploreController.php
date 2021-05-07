@@ -10,7 +10,7 @@ class ExploreController extends Controller
 {
     public function index() {
         return view('explore.index', [
-            'users' => User::all()
+            'users' => User::orderBy('created_at', 'desc')->get()
         ]);
     }
 }
