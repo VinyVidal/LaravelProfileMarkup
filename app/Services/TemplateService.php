@@ -9,9 +9,27 @@ use App\Entities\User; #Model
 
 
 class SomethingService {
-    public function store(array $data){}
+    public function store(array $data) {
+        try {
+            #
+        } catch (Exception $ex) {
+            return Response::handle($ex);
+        }
+    }
 
-    public function update(int $id, array $data){}
+    public function update(int $id, array $data) {
+        try {
+            #
+        } catch (Exception $ex) {
+            return Response::handle($ex);
+        }
+    }
 
-    public function delete(int $id){}
+    public function delete(int $id) {
+        try {
+            #
+        } catch (Exception $ex) {
+            return Response::handle($ex);
+        }
+    }
 }

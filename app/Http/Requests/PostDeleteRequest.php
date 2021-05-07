@@ -2,14 +2,11 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Entities\Post;
-use App\Rules\Media;
+use Illuminate\Foundation\Http\FormRequest;
 
-class PostUpdateRequest extends FormRequest
+class PostDeleteRequest extends FormRequest
 {
-    protected $errorBag = 'post_update';
-
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -17,7 +14,6 @@ class PostUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        $this->errorBag = 'post_update'.$this->route('id');
         $post = Post::find($this->route('id'));
         return $post->user_id === $this->user()->id;
     }
@@ -30,9 +26,7 @@ class PostUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            'text' => 'required|string|max:500',
-            'uploadedMedia' => ['nullable', 'file', new Media],
-            'visibility' => 'required|integer'
+            //
         ];
     }
 }

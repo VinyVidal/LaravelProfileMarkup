@@ -7,6 +7,8 @@ use App\Rules\Media;
 
 class PostCreateRequest extends FormRequest
 {
+    protected $errorBag = 'post_create';
+
     /**
      * Determine if the user is authorized to make this request.
      *

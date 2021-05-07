@@ -11,7 +11,7 @@ $(document).ready(function() {
 
     var context = new FileInputContext;
 
-    $('[role=file-button]').click(function(e) {
+    $('body').on('click', '[role=file-button]', function(e) {
         context.fileInput = document.getElementById(e.target.id+'Input');
         context.preview = document.getElementById(e.target.id+'Preview');
         context.closeButton = document.getElementById(context.preview.id+"Close");
@@ -19,12 +19,12 @@ $(document).ready(function() {
     });
 
 
-    $('[role=file-input]').change(function(e) {
+    $('body').on('change', '[role=file-input]', function(e) {
         setMediaPreview(context.closeButton, context.preview, context.fileInput);
         $('#'+context.closeButton.id).closest('.preview-container').show();
     });
 
-    $('.preview-close').on('click',function() {
+    $('body').on('click', '.preview-close', function() {
         $(this).closest('.preview-container').fadeOut();
         context.fileInput.value = '';
     });

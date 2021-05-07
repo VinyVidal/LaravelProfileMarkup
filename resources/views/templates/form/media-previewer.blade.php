@@ -6,6 +6,7 @@
 {{--                   PARAMETERS 
   * string   @fileInputId -> The exact ID of related file input
     string   @label -> Input label text, activates label for the field
+    string   @defaultvalue -> default image src
     string   @sub -> Subtitle text for the input
     string   @subClass -> Subtitle text css class
     string   @class -> CSS class of the file input
@@ -21,8 +22,8 @@
     <p>{{ $label }}</p>
 @endif
 
-    <div class="preview-container text-center">
-        <img src="" id="{{ $id }}" role="media-previewer" class="preview {{ $class ?? null }}"}}>
+    <div class="preview-container @if(isset($defaultValue)) d-block @endif text-center">
+        <img src="{{ $defaultValue ?? '' }}" id="{{ $id }}" role="media-previewer" class="preview {{ $class ?? null }}"}}>
         <button type="button" class="close" aria-label="Close" title="Remover mídia">
             <span class="preview-close text-body" aria-hidden="true" id="{{ $id.'Close' }}">&times;</span>
         </button>

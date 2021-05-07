@@ -70,7 +70,7 @@
             <div class="row">
               <div class="col">
                 @if (session('message'))
-                    <div class="alert alert-success" role="alert">
+                    <div class="alert alert-{{ session('success') == true ? 'success' : 'danger' }}" role="alert">
                       {{ session('message') }}
                       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -108,6 +108,7 @@
 @section('additional-js')
     <script src="{{ asset('js/profile-pic.js') }}"></script>
     <script src="{{ asset('js/file-input.js') }}"></script>
+    <script src="{{ asset('js/post-edit-modal.js') }}"></script>
     @if (Route::currentRouteName() != 'user.profile')
       <script src="{{ asset('js/scrollToElement.js') }}"></script>
     @endif

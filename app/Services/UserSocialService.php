@@ -7,9 +7,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Entities\UserSocial;
 use App\Entities\User;
+use App\Exceptions\Response;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Support\Str;
-
 
 class UserSocialService {
 
@@ -69,9 +69,8 @@ class UserSocialService {
             
             
         } 
-        catch (Exception $e) {
-            dd($e->getMessage());
-            return $e->getMessage();
+        catch (Exception $ex) {
+            return Response::handle($ex);
         }
     }
     

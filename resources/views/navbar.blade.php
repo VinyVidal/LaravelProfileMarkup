@@ -18,6 +18,9 @@
         <li class="nav-item active">
           <a class="nav-link" href="{{ route('index') }}">Página Inicial <span class="sr-only">(current)</span></a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ route('explore') }}">Explorar</a>
+        </li>
         {{-- Profile Menu MOBILE --}}
         <li class="nav-item mobile-sm">
           <a class="nav-link" data-toggle="collapse" href="#profileMobileCollapse" aria-expanded="false" aria-controls="profileMobileCollapse">
@@ -26,7 +29,7 @@
           <div class="collapse" id="profileMobileCollapse">
             <a class="dropdown-item" href="{{ route('user.profile') }}">Meu Perfil</a>
           <a class="dropdown-item" href="#">Configurações</a>
-          <a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a>
+          <a class="dropdown-item" href="{{ route('user.logout') }}">Sair</a>
           </div>
         </li>
         {{-- Profile Menu MOBILE --}}

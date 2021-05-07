@@ -1,15 +1,12 @@
-@extends('templates/master')
+@extends('templates/page/default')
 
 @section('title')
-    Titulo
+    Início
 @endsection
 
-@section('content')
-    @include('navbar', ['username' => $user->username, 'useravatar' => $user->photo])
-    <h1>{{ $message ?? 'Seja bem-vindo, '.$user->username.'!' }} </h1>
-    @include('templates.component.create-post')
-@endsection
-
-@section('additional-js')
-    <script src="{{ asset('js/file-input.js') }}"></script>
+@section('inner-content')
+    <div class="p-3">
+        <h2 class="pl-md-4 mb-md-3">{{ $message ?? 'Seja bem-vindo, '.$user->username.'!' }} </h2>
+        @include('post.create')
+    </div>
 @endsection

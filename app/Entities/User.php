@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this->listPosts = $this->posts()->orderBy('created_at', 'desc')->get();
     }
 
+    public function getCoverAttribute() {
+        return $this->cover = $this->attributes['cover'] === null ? asset('img/default-cover.png') : $this->attributes['cover'];
+    }
+
     /**
      * Sets a unique username to the user
      * @return string $username
