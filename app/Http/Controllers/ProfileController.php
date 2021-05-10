@@ -28,31 +28,67 @@ class ProfileController extends Controller
     /**
      * Shows user own profile page (activities page)
      */
-    public function index()
+    public function index($username = null)
     {
+        $user = Auth::user();
+        $visitor = false;
+        if($username) {
+            $exists = User::where('username', $username)->first();
+            if($exists) {
+                $user = $exists;
+                $visitor = true;
+            } else {
+                return redirect(route('user.profile'));
+            }
+        }
         return view('user.profile.index', [
-            'user' => Auth::user(),
-            'posts' => Post::where('user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get()
+            'visitor' => $visitor,
+            'user' => $user,
+            'posts' => Post::where('user_id', $user->id)->orderBy('created_at', 'desc')->get()
         ]);
     }
 
     /**
      * Show page with user info
      */
-    public function showAbout()
+    public function showAbout($username = null)
     {
+        $user = Auth::user();
+        $visitor = false;
+        if($username) {
+            $exists = User::where('username', $username)->first();
+            if($exists) {
+                $user = $exists;
+                $visitor = true;
+            } else {
+                return redirect(route('user.profile'));
+            }
+        }
         return view('user.profile.about', [
-            'user' => Auth::user(),
+            'visitor' => $visitor,
+            'user' => $user,
         ]);
     }
 
     /**
      * Show page with user friends
      */
-    public function showFriends()
+    public function showFriends($username = null)
     {
+        $user = Auth::user();
+        $visitor = false;
+        if($username) {
+            $exists = User::where('username', $username)->first();
+            if($exists) {
+                $user = $exists;
+                $visitor = true;
+            } else {
+                return redirect(route('user.profile'));
+            }
+        }
         return view('user.profile.friends', [
-            'user' => Auth::user(),
+            'visitor' => $visitor,
+            'user' => $user,
         ]);
     }
 
