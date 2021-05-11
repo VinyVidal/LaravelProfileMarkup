@@ -10,7 +10,11 @@
     @if (isset($user->bio))
     <p class="user-bio border border-secondary rounded bg-light p-2 p-md-3">{!! nl2br($user->bio) !!}</p>
     @else
-    <p class="user-bio text-center p-2 p-md-3"><a class="text-secondary" href="#" data-toggle="modal" data-target="#editProfileModal"> Clique aqui para adicionar uma apresentação sobre você!</a></p>
+        @if ($visitor)
+        <p class="user-bio text-center p2 p-md-3">Este usuário não adicionou uma biagrafia</p>
+        @else
+        <p class="user-bio text-center p-2 p-md-3"><a class="text-secondary" href="#" data-toggle="modal" data-target="#editProfileModal"> Clique aqui para adicionar uma apresentação sobre você!</a></p>
+        @endif
     @endif
 </div>
 @endsection

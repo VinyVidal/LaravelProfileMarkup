@@ -25,12 +25,17 @@
         </div>
         {!! Form::close() !!}
 
-        @foreach ($users as $user)
-        <div class="row mt-3 ml-3">
-            <div class="col">
-                <a href="{{route('user.profile', $user->username)}}"><img src="{{ asset($user->photo) }}" alt="user-avatar" class="size-sm rounded-circle mr-3"> <span class="link-body-underline font-weight-bold">{{ $user->fullName }}</span></a>
-            </div><!--col-->
-        </div><!--row-->            
+        @if (count($users) > 0)
+            @foreach ($users as $user)
+            <div class="row mt-3 ml-3">
+                <div class="col">
+                    <a href="{{route('user.profile', $user->username)}}"><img src="{{ asset($user->photo) }}" alt="user-avatar" class="size-sm rounded-circle mr-3"> <span class="link-body-underline font-weight-bold">{{ $user->fullName }}</span></a>
+                </div><!--col-->
+            </div><!--row-->            
         @endforeach
+        @else
+            <p class="mt-2 p-3 ml-2">Nenhum usuário encontrado</p>
+        @endif
+        
     </div>
 @endsection
