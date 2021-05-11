@@ -6,7 +6,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Entities\User; #Model
-
+use App\Exceptions\Response;
 
 class SomethingService {
     public function store(array $data) {
