@@ -57,6 +57,23 @@ class User extends Authenticatable
     }
 
     /**
+     * Returns all the users following the user
+     */
+    public function followers()
+    {
+        return $this->hasMany(UserFollow::class, 'followed_id');
+    }
+
+    /**
+     * Returns TRUE in case this Entity has a UserFollow relationship with the parameter user
+     * 
+     */
+    public function followsUser(User $user)
+    {
+        return count($user->followers->where('follower_id', $this->id)) > 0;
+    }
+
+    /**
      * Sets a unique username to the user
      * @return string $username
      */

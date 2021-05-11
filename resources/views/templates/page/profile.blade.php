@@ -62,6 +62,12 @@
                 <div class="action-buttons">
                   @if (!$visitor)
                     <button class="btn btn-primary" data-toggle="modal" data-target="#editProfileModal"><i class="fas fa-edit"></i> Editar Perfil</button>
+                  @else
+                    @if (Auth::user()->followsUser($user))
+                      <button class="btn btn-primary" title="Deixar de seguir"><i class="fas fa-check"></i> Seguindo</button>  
+                    @else
+                      <button class="btn btn-outline-primary" onclick="window.location.href='{{ route('user.follow', ['follower_id' => Auth::user()->id, 'followed_id' => $user->id]) }}'"><i class="fas fa-eye"></i> Seguir</button>
+                    @endif
                   @endif
                 </div>
             </div><!-- profile-avatar-container -->
