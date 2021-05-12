@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Entities\Post;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -26,7 +27,8 @@ class Controller extends BaseController
         if(Auth::check())
         {
             return view('index', [
-                'user' => Auth::user()
+                'user' => Auth::user(),
+                'posts' => Post::whereIn('user_id', array_merge([Auth::user()->id], Auth::user()->followeds->pluck('followed_id')->all()))->orderBy('created_at', 'desc')->get()
             ]);
         }
         else
