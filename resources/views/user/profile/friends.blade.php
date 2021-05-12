@@ -8,35 +8,41 @@
 <h4 class="text-center mt-0 border-bottom border-main bg-main text-main py-2">Amigos</h4>
 <ul class="nav nav-tabs text-center border-bottom flex-column flex-md-row" role="tablist" id="friendsTab">
     <li class="col nav-item">
-        <a class="nav-link active border-bottom" id="allFriends-tab" role="tab" data-toggle="tab" href="#allFriends" aria-controls="allFriends" aria-selected="true">Todos Amigos</a>
+        <a class="nav-link active border-bottom" id="followers-tab" role="tab" data-toggle="tab" href="#followers" aria-controls="followers" aria-selected="true">Seguidores</a>
     </li>
     <li class="col nav-item">
-        <a class="nav-link" id="commonFriends-tab" role="tab" data-toggle="tab" href="#commonFriends" aria-controls="commonFriends" aria-selected="false">Amigos em Comum</a>
+        <a class="nav-link" id="following-tab" role="tab" data-toggle="tab" href="#following" aria-controls="following" aria-selected="false">Seguindo</a>
     </li>
 </ul>
 <div class="tab-content px-1  py-2" id="friendsTabContent">
-    <div class="tab-pane fade show active container" role="tabpanel" id="allFriends" aria-labelledby="allFriends-tab">
-        <div class="row mt-3">
-            <div class="col">
-                <a href="#"><img src="{{ asset('img/default-avatar.png') }}" alt="user-avatar" class="size-sm rounded-circle mr-3"> <span class="link-body-underline font-weight-bold">Some Friend</span></a>
-            </div><!--col-->
-            <div class="col-md mt-4 mt-md-0">
-                <a href="#"><img src="{{ asset('img/default-avatar.png') }}" alt="user-avatar" class="size-sm rounded-circle mr-3"> <span class="link-body-underline font-weight-bold">Some Friend</span></a>
-            </div><!--col-->
+    <div class="tab-pane fade show active container" role="tabpanel" id="followers" aria-labelledby="followers-tab">
+        @if (count($followers) > 0)
+            <div class="row mt-3">
+            @foreach ($followers as $key => $u)
+                <div class="col-lg-6 {{ $key > 0 ? 'mt-4 mt-lg-0' : '' }}">
+                    <a href="{{route('user.profile', $u->follower->username)}}"><img src="{{ asset($u->follower->photo) }}" alt="user-avatar" class="size-sm rounded-circle mr-3"> <span class="link-body-underline font-weight-bold">{{ $u->follower->fullName }}</span></a>
+                </div><!--col-->
+            @endforeach
         </div><!--row-->
-    </div><!--tab allFriends-->
+        @else
+            <p>Nenhum seguidor.</p>
+        @endif
+        
+    </div><!--tab followers-->
 
-
-
-    <div class="tab-pane fade container" role="tabpanel" id="commonFriends" aria-labelledby="commonFriends-tab">
-        <div class="row mt-3">
-            <div class="col">
-                <a href="#"><img src="{{ asset('img/default-avatar.png') }}" alt="user-avatar" class="size-sm rounded-circle mr-3"> <span class="link-body-underline font-weight-bold">Common Friend</span></a>
-            </div><!--col-->
-            <div class="col-md mt-4 mt-md-0">
-                <a href="#"><img src="{{ asset('img/default-avatar.png') }}" alt="user-avatar" class="size-sm rounded-circle mr-3"> <span class="link-body-underline font-weight-bold">Common Friend</span></a>
-            </div><!--col-->
+    <div class="tab-pane fade container" role="tabpanel" id="following" aria-labelledby="following-tab">
+        @if (count($followeds) > 0)
+            <div class="row mt-3">
+            @foreach ($followeds as $key => $u)
+                <div class="col-lg-6 {{ $key > 0 ? 'mt-4 mt-lg-0' : '' }}">
+                    <a href="{{route('user.profile', $u->followed->username)}}"><img src="{{ asset($u->followed->photo) }}" alt="user-avatar" class="size-sm rounded-circle mr-3"> <span class="link-body-underline font-weight-bold">{{ $u->followed->fullName }}</span></a>
+                </div><!--col-->
+            @endforeach
         </div><!--row-->
-    </div><!--tab allFriends-->
+        @else
+            <p>Nenhum usuário seguido.</p>
+        @endif
+        
+    </div><!--tab followers-->
 </div>
 @endsection

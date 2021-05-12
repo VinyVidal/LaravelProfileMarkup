@@ -89,6 +89,8 @@ class ProfileController extends Controller
         return view('user.profile.friends', [
             'visitor' => $visitor,
             'user' => $user,
+            'followers' => $user->followers->all(),
+            'followeds' => $user->followeds->all()
         ]);
     }
 
