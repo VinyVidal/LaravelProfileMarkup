@@ -58,7 +58,7 @@
       <div class="profile-background" style="background-image: url('{{ $user->cover }}');">
             <div class="profile-avatar-container">
                 <img src="{{ $user->photo ?? asset('img/default-avatar.png') ?? asset('img/default-avatar.png') }}" alt="Foto de Perfil" class="img-thumbnail rounded-circle">
-                <h2 class="mt-3">{{ $user->fullName  ?? 'null'  }}</h2>
+                <h2 class="mt-3">{{ $user->fullName  ?? 'null'  }} <small>{{ '@' . $user->username }}</small></h2>
                 <div class="action-buttons">
                   @if (!$visitor)
                     <button class="btn btn-primary" data-toggle="modal" data-target="#editProfileModal"><i class="fas fa-edit"></i> Editar Perfil</button>
