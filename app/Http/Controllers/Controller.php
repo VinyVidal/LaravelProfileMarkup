@@ -28,7 +28,7 @@ class Controller extends BaseController
         {
             return view('index', [
                 'user' => Auth::user(),
-                'posts' => Post::whereIn('user_id', array_merge([Auth::user()->id], Auth::user()->followeds->pluck('followed_id')->all()))->orderBy('created_at', 'desc')->get()
+                'posts' => Post::feed(Auth::user())->get()
             ]);
         }
         else

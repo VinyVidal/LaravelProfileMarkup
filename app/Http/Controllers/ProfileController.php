@@ -44,7 +44,7 @@ class ProfileController extends Controller
         return view('user.profile.index', [
             'visitor' => $visitor,
             'user' => $user,
-            'posts' => Post::where('user_id', $user->id)->orderBy('created_at', 'desc')->get()
+            'posts' => Post::activity($user)->get()
         ]);
     }
 

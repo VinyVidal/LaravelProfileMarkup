@@ -27,4 +27,12 @@ class Post extends Model
         $created = new Carbon($this->created_at);
         return $this->timeSinceCreated = $created->diffForHumans();
     }
+
+    public static function feed(User $user) {
+        return self::whereIn('user_id', array_merge([$user->id], $user->followeds->pluck('followed_id')->all()))->orderBy('created_at', 'desc');
+    }
+
+    public static function activity(User $user) {
+        return self::where('user_id', $user->id)->orderBy('created_at', 'desc');
+    }
 }
