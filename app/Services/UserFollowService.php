@@ -25,9 +25,16 @@ class UserFollowService {
         }
     }
 
-    public function unfollow(int $id) {
+    public function unfollow(array $data) {
         try {
-            #
+            $userFollow = UserFollow::where('follower_id', $data['follower_id'])->where('followed_id', $data['followed_id'])->first();
+            if($userFollow) {
+                $userFollow->delete();
+            }
+            return [
+                'success' => true,
+                'data' => $userFollow
+            ];
         } catch (Exception $ex) {
             return Response::handle($ex);
         }

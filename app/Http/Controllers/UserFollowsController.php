@@ -28,4 +28,19 @@ class UserFollowsController extends Controller
             ]);
         }
     }
+    public function unfollow(UserFollowRequest $request) {
+        $return = $this->service->unfollow($request->all());
+        if($return['success'])
+        {
+            return redirect()->back()->with([
+                'success' => true,
+                'message' => 'Você deixou de seguir '.$return['data']->followed->fullName.'!',
+            ]);
+        } else {
+            return redirect()->back()->with([
+                'success' => false,
+                'message' => $return['message'],
+            ]);
+        }
+    }
 }

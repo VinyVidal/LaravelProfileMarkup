@@ -18,6 +18,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/explore', ['as' => 'explore', 'middleware' => 'auth', 'uses' => 'ExploreController@index']);
 
     Route::get('/follow', ['as' => 'user.follow', 'uses' => 'UserFollowsController@follow']);
+    Route::get('/unfollow', ['as' => 'user.unfollow', 'uses' => 'UserFollowsController@unfollow']);
 
     /* -------------- POSTS --------------*/
     Route::post('/post/new', ['as' => 'post.store', 'uses' => 'PostsController@store']);
