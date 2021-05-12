@@ -5,14 +5,6 @@
 @endsection
 
 @section('inner-content')
-    @if (session('message'))
-    <div class="alert alert-success" role="alert">
-        {{ session('message') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-    @endif
     <div class="p-3">
         <h2 class="pl-md-4 mb-md-3">Encontre novos contatos!</h2>
 
@@ -31,6 +23,13 @@
                 <div class="col">
                     <a href="{{route('user.profile', $user->username)}}"><img src="{{ asset($user->photo) }}" alt="user-avatar" class="size-sm rounded-circle mr-3"> <span class="link-body-underline font-weight-bold">{{ $user->fullName }}</span></a>
                 </div><!--col-->
+                <div class="col text-right">
+                    @if (Auth::user()->followsUser($user))
+                    <button class="btn btn-primary" onclick="window.location.href='{{ route('user.unfollow', ['follower_id' => Auth::user()->id, 'followed_id' => $user->id]) }}'" title="Deixar de seguir"><i class="fas fa-check"></i> Seguindo</button>  
+                    @else
+                        <button class="btn btn-outline-primary" onclick="window.location.href='{{ route('user.follow', ['follower_id' => Auth::user()->id, 'followed_id' => $user->id]) }}'"><i class="fas fa-eye"></i> Seguir</button>
+                    @endif
+                </div>
             </div><!--row-->            
         @endforeach
         @else

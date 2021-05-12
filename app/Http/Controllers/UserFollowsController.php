@@ -34,7 +34,7 @@ class UserFollowsController extends Controller
         {
             return redirect()->back()->with([
                 'success' => true,
-                'message' => 'Você deixou de seguir '.$return['data']->followed->fullName.'!',
+                'message' => 'Você deixou de seguir '.$return['data']->followed->fullName.'.',
             ]);
         } else {
             return redirect()->back()->with([

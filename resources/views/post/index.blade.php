@@ -21,7 +21,7 @@
 
 <div class="post border p-3" style="position: relative;">
     <div class="post-header">
-    <div class="post-avatar"><img src="{{ $user->photo }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div><a href="#" class="post-author link-body-underline font-weight-bold">{{ $user->fullName }} </a>
+    <div class="post-avatar"><img src="{{ $user->photo }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div><a href="{{route('user.profile', $user->username)}}" class="post-author link-body-underline font-weight-bold">{{ $user->fullName }} </a>
         <div class="post-header-info text-muted font-sm">{{ $post->timeSinceCreated }}</div>
         <div class="dropdown three-dots-dropdown dropleft">
             <a class="three-dots-button clickable-lgray" href="#" role="button" id="post{{ $post->id }}ThreeDotsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
