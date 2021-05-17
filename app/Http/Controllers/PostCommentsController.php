@@ -8,6 +8,7 @@ use App\Http\Requests\PostCommentUpdateRequest;
 use App\Services\PostCommentService;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostCommentsController extends Controller
 {
@@ -23,9 +24,10 @@ class PostCommentsController extends Controller
     /**
      * Create a new post
      */
-    public function store(PostCommentCreateRequest $request)
+    public function store($postId, PostCommentCreateRequest $request)
     {
         $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
         $return = $this->service->store($data);
 
         if($return['success'])
@@ -45,9 +47,10 @@ class PostCommentsController extends Controller
     /**
      * Update post content
      */
-    public function update($id, PostCommentUpdateRequest $request)
+    public function update($postId, $id, PostCommentUpdateRequest $request)
     {
         $data = $request->all();
+        $data['user_id'] = Auth::user()->id;
         $return = $this->service->update($id, $data);
 
         if($return['success'])
@@ -67,7 +70,7 @@ class PostCommentsController extends Controller
     /**
      * Remove a post
      */
-    public function delete($id, PostCommentDeleteRequest $request)
+    public function delete($postId, $id, PostCommentDeleteRequest $request)
     {
         $return = $this->service->delete($id);
 

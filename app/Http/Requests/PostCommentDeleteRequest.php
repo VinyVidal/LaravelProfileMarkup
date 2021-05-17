@@ -26,7 +26,14 @@ class PostCommentDeleteRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'post_id'=> 'required|integer|exists:posts,id'
         ];
+    }
+
+    public function all($keys = null) 
+    {
+        $data = parent::all($keys);
+        $data['post_id'] = $this->route('postId');
+        return $data;
     }
 }

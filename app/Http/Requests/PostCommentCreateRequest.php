@@ -25,8 +25,14 @@ class PostCommentCreateRequest extends FormRequest
     {
         return [
             'comment' => 'string|max:500|required',
-            'post_id'=> 'required|integer|exists:posts,id',
-            'user_id'=> 'required|integer|exists:users,id'
+            'post_id'=> 'required|integer|exists:posts,id'
         ];
+    }
+
+    public function all($keys = null) 
+    {
+        $data = parent::all($keys);
+        $data['post_id'] = $this->route('postId');
+        return $data;
     }
 }

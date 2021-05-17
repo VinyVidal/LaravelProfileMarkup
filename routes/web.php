@@ -21,10 +21,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/unfollow', ['as' => 'user.unfollow', 'uses' => 'UserFollowsController@unfollow']);
 
     /* -------------- POSTS --------------*/
-    Route::post('/post/new', ['as' => 'post.store', 'uses' => 'PostsController@store']);
+    Route::post('/post/store', ['as' => 'post.store', 'uses' => 'PostsController@store']);
     Route::post('/post/update/{id}', ['as' => 'post.update', 'uses' => 'PostsController@update']);
     Route::get('/post/edit', ['as' => 'post.edit', 'uses' => 'PostsController@ajaxEdit']);
     Route::get('/post/delete/{id}', ['as' => 'post.delete', 'uses' => 'PostsController@delete']);
+    /* -------------- POST COMMENTS --------------*/
+    Route::post('/post/{postId}/comment/store', ['as' => 'post.store', 'uses' => 'PostsController@store']);
+    Route::post('/post/{postId}/comment/update/{id}', ['as' => 'post.update', 'uses' => 'PostsController@update']);
+    Route::get('/post/{postId}/comment/delete/{id}', ['as' => 'post.delete', 'uses' => 'PostsController@delete']);
+    
 
     /* -------------- USER OWN PROFILE --------------*/
     Route::get('/profile', ['as' => 'user.profile', 'uses' => 'ProfileController@index']);
