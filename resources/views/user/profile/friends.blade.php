@@ -8,10 +8,10 @@
 <h4 class="text-center mt-0 border-bottom border-main bg-main text-main py-2">Amigos</h4>
 <ul class="nav nav-tabs text-center border-bottom flex-column flex-md-row" role="tablist" id="friendsTab">
     <li class="col nav-item">
-        <a class="nav-link active border-bottom" id="followers-tab" role="tab" data-toggle="tab" href="#followers" aria-controls="followers" aria-selected="true">Seguidores</a>
+        <a class="nav-link active border-bottom" id="followers-tab" role="tab" data-toggle="tab" href="#followers" aria-controls="followers" aria-selected="true">Seguidores <small>{{ count($followers) > 0 ? count($followers) : '' }} </small></a>
     </li>
     <li class="col nav-item">
-        <a class="nav-link" id="following-tab" role="tab" data-toggle="tab" href="#following" aria-controls="following" aria-selected="false">Seguindo</a>
+        <a class="nav-link" id="following-tab" role="tab" data-toggle="tab" href="#following" aria-controls="following" aria-selected="false">Seguindo  <small>{{ count($followeds) > 0 ? count($followeds) : '' }} </small></a>
     </li>
 </ul>
 <div class="tab-content px-1  py-2" id="friendsTabContent">
