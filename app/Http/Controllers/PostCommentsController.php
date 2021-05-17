@@ -35,11 +35,13 @@ class PostCommentsController extends Controller
             return redirect()->back()->with([
                 'success' => true,
                 'message' => 'Comentário adicionado com sucesso!',
+                'comment' => $return['data']
             ]);
         } else {
             return redirect()->back()->with([
                 'success' => false,
                 'message' => $return['message'],
+                'commented_post_id' => $postId
             ]);
         }
     }
@@ -62,7 +64,7 @@ class PostCommentsController extends Controller
         } else {
             return redirect()->back()->with([
                 'success' => false,
-                'message' => $return['message'],
+                'message' => $return['message']
             ]);
         }
     }
@@ -83,7 +85,7 @@ class PostCommentsController extends Controller
         } else {
             return redirect()->back()->with([
                 'success' => false,
-                'message' => $return['message'],
+                'message' => $return['message']
             ]);
         }
     }

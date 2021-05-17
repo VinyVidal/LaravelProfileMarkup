@@ -49,30 +49,43 @@
         <span class="post-likes clickable-lgray"><i class="far fa-thumbs-up fa-2x"></i> 100</span>
         {{-- <span class="mx-5"></span> --}}
         <a data-toggle="collapse" href="#collapsePost{{ $post->id }}" class="text-body">
-            <span class="post-comments-info clickable-lgray"><i class="far fa-comment fa-2x"></i> 5</span>
+            <span class="post-comments-info clickable-lgray"><i class="far fa-comment fa-2x"></i> {{ $post->comments->count() }}</span>
         </a>
-        <div class="collapse mt-4 text-left" id="collapsePost{{ $post->id }}">
-            <div class="post-comment border-bottom pb-2">
-                <div class="post-comment-avatar"><img src="{{ asset('img/default-avatar.png') }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div>
-                <div class="post-comment-author font-weight-bold font-sm"> User FullName </div>
-                <div class="post-comment-content font-sm">Comentário aleatório</div>
-                <div class="clear"></div>
-            </div><!--post-comment-->
-
-            <div class="post-comment mt-2 border-bottom pb-2">
-                <div class="post-comment-avatar"><img src="{{ asset('img/default-avatar.png') }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div>
-                <div class="post-comment-author font-weight-bold font-sm"> User FullName </div>
-                <div class="post-comment-content font-sm">Comentário aleatório</div>
-                
-                <div class="clear"></div>
-            </div><!--post-comment-->
-
-            <div class="post-comment mt-2">
-                <div class="post-comment-avatar"><img src="{{ asset('img/default-avatar.png') }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div>
-                <div class="post-comment-author font-weight-bold font-sm"> User FullName </div>
-                <div class="post-comment-content font-sm">Comentário aleatório</div>
-                <div class="clear"></div>
-            </div><!--post-comment-->
+        @if (session('commented_post_id') && session('commented_post_id') == $post->id)
+                <span id="post{{ $post->id }}CommentErrors" scrollTo></span>
+        @endif
+        <div class="collapse {{ (session('comment') && session('comment')->post_id == $post->id) || session('commented_post_id') ? 'show' : '' }} mt-4 text-left" id="collapsePost{{ $post->id }}">
+            @if ($post->comments->count())
+            @foreach ($post->comments->all() as $comment)
+                <div id="comment{{ $comment->id }}Wrapper" class="post-comment border-bottom pb-2" {{ session('comment') && session('comment')->id == $comment->id ? 'scrollTo' : '' }}>
+                    <div class="post-comment-avatar"><img src="{{ asset($comment->user->photo) }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div>
+                    <div class="post-comment-author font-weight-bold font-sm"> {{ $comment->user->fullName }} </div>
+                    <div class="post-comment-content font-sm">{{ $comment->comment }}</div>
+                    <div class="clear"></div>
+                </div><!--post-comment-->  
+            @endforeach
+            @else
+                <p class="px-3">Seja o primeiro a comentar!</p>
+            @endif
+            
+            
+            {!! Form::open(['method' => 'post', 'route' => ['post.comment.store', $post->id]]) !!}
+            <div class="row mt-3">
+                <div class="col">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <img src="{{ Auth::user()->photo ?? asset('img/default-avatar.png') }}" alt="user-avatar" class="size-xs rounded-circle mr-3">
+                        </div>
+                        <input class="form-control mt-1" placeholder="Deixe um comentário" name="comment" required="required">
+                        <button type="submit" class="form-control col-2 mt-1 btn btn-primary"> Enviar</button>
+                    </div>
+                </div><!--col-->
+            </div>
+            @if (session('commented_post_id') && session('commented_post_id') == $post->id)
+                <span id="post{{ $post->id }}CommentErrors" scrollTo></span>
+                @include('templates.form.errors', ['fields' => ['comment'], 'class' => 'alert alert-danger py-2 my-2', 'bag' => 'post_comment_create'])
+            @endif
+            {!! Form::close() !!}
         </div><!-- collapse -->
     </div><!--post-footer-->
 </div><!--post-->

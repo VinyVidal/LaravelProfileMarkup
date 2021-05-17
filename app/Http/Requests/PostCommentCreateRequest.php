@@ -3,9 +3,12 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Contracts\Validation\Validator;
+use Illuminate\Validation\ValidationException;
 
 class PostCommentCreateRequest extends FormRequest
 {
+    protected $errorBag = 'post_comment_create';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -34,5 +37,13 @@ class PostCommentCreateRequest extends FormRequest
         $data = parent::all($keys);
         $data['post_id'] = $this->route('postId');
         return $data;
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        session()->flash('commented_post_id', $this->route('postId'));
+        throw (new ValidationException($validator))
+                    ->errorBag($this->errorBag)
+                    ->redirectTo($this->getRedirectUrl());
     }
 }

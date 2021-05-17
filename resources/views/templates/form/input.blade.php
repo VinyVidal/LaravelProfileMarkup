@@ -27,7 +27,7 @@
 
 <div class="form-group">
 
-    @if ($label)
+    @if (isset($label))
         {!! Form::label($attributes['id'], $label) !!}
     @endif
 
