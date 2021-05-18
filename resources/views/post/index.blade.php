@@ -57,7 +57,7 @@
         <div class="collapse {{ (session('comment') && session('comment')->post_id == $post->id) || session('commented_post_id') ? 'show' : '' }} mt-4 text-left" id="collapsePost{{ $post->id }}">
             @if ($post->comments->count())
             @foreach ($post->comments->all() as $comment)
-                <div id="comment{{ $comment->id }}Wrapper" class="post-comment border-bottom pb-2" {{ session('comment') && session('comment')->id == $comment->id ? 'scrollTo' : '' }}>
+                <div id="comment{{ $comment->id }}Wrapper" class="post-comment border-bottom pb-2 mt-2" {{ session('comment') && session('comment')->id == $comment->id ? 'scrollTo' : '' }}>
                     <div class="post-comment-avatar"><img src="{{ asset($comment->user->photo) }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div>
                     <div class="post-comment-author font-weight-bold font-sm"> {{ $comment->user->fullName }} </div>
                     <div class="post-comment-content font-sm">{{ $comment->comment }}</div>
