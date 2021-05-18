@@ -23,17 +23,17 @@
     <div class="post-header">
     <div class="post-avatar"><img src="{{ $user->photo }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div><a href="{{route('user.profile', $user->username)}}" class="post-author link-body-underline font-weight-bold">{{ $user->fullName }} </a>
         <div class="post-header-info text-muted font-sm">{{ $post->timeSinceCreated }}</div>
-        <div class="dropdown three-dots-dropdown dropleft">
-            <a class="three-dots-button clickable-lgray" href="#" role="button" id="post{{ $post->id }}ThreeDotsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-v"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="post{{ $post->id }}ThreeDotsDropdown">
-                @if ($user->id === Auth::user()->id)
+        @if ($user->id === Auth::user()->id)
+            <div class="dropdown three-dots-dropdown dropleft">
+                <a class="three-dots-button clickable-lgray" href="#" role="button" id="post{{ $post->id }}ThreeDotsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-v"></i>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="post{{ $post->id }}ThreeDotsDropdown">
                     <a class="dropdown-item" data-toggle="modal" id="postModalEditButton{{ $post->id }}" data-id="{{ $post->id }}" data-url="{{ route('post.edit', ['id' => $post->id]) }}" data-target="#editPostModal" href="#">Editar</a>
                     <button class="dropdown-item" data-confirm="Atenção||Deseja mesmo remover a postagem? Essa ação é irreversível!" data-url="{{ route('post.delete', [$post->id]) }}" data-class="text-danger">Remover</button>
-                @endif
-              </div>
-        </div>
+                </div>
+            </div>
+        @endif
     </div><!--post-header-->
 
     <div class="clear"></div>
@@ -59,7 +59,7 @@
             @foreach ($post->comments->all() as $comment)
                 <div id="comment{{ $comment->id }}Wrapper" class="post-comment border-bottom pb-2 mt-2" {{ session('comment') && session('comment')->id == $comment->id ? 'scrollTo' : '' }}>
                     <div class="post-comment-avatar"><img src="{{ asset($comment->user->photo) }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div>
-                    <div class="post-comment-author font-weight-bold font-sm"> {{ $comment->user->fullName }} </div>
+                    <div class="post-comment-author font-weight-bold font-sm"> <a href="{{route('user.profile', $comment->user->username)}}" class="link-body-underline font-weight-bold">{{ $comment->user->fullName }} </a> </div>
                     <div class="post-comment-content font-sm">{{ $comment->comment }}</div>
                     <div class="clear"></div>
                 </div><!--post-comment-->  

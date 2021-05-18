@@ -309,6 +309,10 @@ nav.navbar {
     color: #2e2e2e
 }
 
+.three-dots-dropdown .three-dots-button {
+    color:#121212;
+}
+
 /* 
     --------------------
        DEVICE RESPONSIVE

@@ -5,7 +5,7 @@ $(document).ready(function () {
     {
         if($('*[scrollTo]').attr('scrollTo') == "")
         {
-            scrollTo($('*[scrollTo]').first().attr('id'));
+            scrollTo($('*[scrollTo]').last().attr('id'));
         }
         
     }
