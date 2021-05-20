@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/post/delete/{id}', ['as' => 'post.delete', 'uses' => 'PostsController@delete']);
     /* -------------- POST COMMENTS --------------*/
     Route::post('/post/{postId}/comment/store', ['as' => 'post.comment.store', 'uses' => 'PostCommentsController@store']);
+    Route::get('/post/{postId}/comment/edit/{id}', ['as' => 'post.comment.edit', 'uses' => 'PostCommentsController@ajaxEdit']);
     Route::post('/post/{postId}/comment/update/{id}', ['as' => 'post.comment.update', 'uses' => 'PostCommentsController@update']);
     Route::get('/post/{postId}/comment/delete/{id}', ['as' => 'post.comment.delete', 'uses' => 'PostCommentsController@delete']);
     

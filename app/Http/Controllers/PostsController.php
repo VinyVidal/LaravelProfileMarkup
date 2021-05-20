@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Entities\Post;
 use App\Services\PostService;
 use App\Http\Requests\PostCreateRequest;
+use App\Http\Requests\PostDeleteRequest;
 use App\Http\Requests\PostUpdateRequest;
 use Exception;
 use Facade\FlareClient\View;
@@ -77,7 +78,7 @@ class PostsController extends Controller
     /**
      * Remove a post
      */
-    public function delete($id)
+    public function delete($id, PostDeleteRequest $request)
     {
         $return = $this->service->delete($id);
 

@@ -5,7 +5,7 @@ $(document).ready(function () {
         button = $(ev.relatedTarget);
         url = button.data('url');
     
-        loadEditModalContent(url, null);
+        loadPostEditModalContent(url, null);
     })
 
     $('#editPostModal').on('hidden.bs.modal', function (ev) {
@@ -13,7 +13,7 @@ $(document).ready(function () {
     })
 });
 
-function loadEditModalContent(url, errors) {
+function loadPostEditModalContent(url, errors) {
     AJAXrequest(url, null, function(result) {
         $('#editPostModalContent').html(result.view);
         if(errors) {

@@ -18,4 +18,11 @@
             Nenhuma atividade
         @endif
     </div>
+
+    @include('post.edit')
+@endsection
+
+@section('additional-js')
+    <script src="{{ asset('js/post-edit-modal.js') }}"></script>
+    <script src="{{ asset('js/post-comment-edit-modal.js') }}"></script>
 @endsection

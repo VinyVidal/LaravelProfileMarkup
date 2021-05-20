@@ -117,6 +117,7 @@
     <script src="{{ asset('js/profile-pic.js') }}"></script>
     <script src="{{ asset('js/file-input.js') }}"></script>
     <script src="{{ asset('js/post-edit-modal.js') }}"></script>
+    <script src="{{ asset('js/post-comment-edit-modal.js') }}"></script>
     @if (Route::currentRouteName() != 'user.profile')
       <script src="{{ asset('js/scrollToElement.js') }}"></script>
     @endif

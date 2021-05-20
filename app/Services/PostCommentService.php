@@ -48,4 +48,25 @@ class PostCommentService {
             return Response::handle($ex);
         }
     }
+
+    public function ajaxEdit(array $data)
+    {
+        try {
+            $comment = PostComment::find($data['id'] ?? 0);
+            if(!$comment) {
+                throw new Exception('Comment not found');
+            }
+
+            $view = view('post.comment.edit-form', [
+                'post' => $comment->post,
+                'comment' => $comment
+            ])->render();
+            return [
+                'success' => true,
+                'data' => $view
+            ];
+        } catch (Exception $ex) {
+            return Response::handle($ex);
+        }
+    }
 }

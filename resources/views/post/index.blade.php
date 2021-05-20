@@ -10,13 +10,20 @@
 
 @php
     $user = $post->user;
-    $errorBagName = 'post_update'.$post->id;
+    $postErrors = 'post_update'.$post->id;
+    $commentErrors = 'post_comment_update'.session('comment_id');
 @endphp
-@if (count($errors->$errorBagName) > 0)
+@if (count($errors->$postErrors) > 0)
     <div class="d-none" id="errors">
         @include('templates.form.errors', ['fields' => ['visibility', 'uploadedMedia', 'text', 'user_id'], 'class' => 'alert alert-danger py-2 my-2', 'bag' => 'post_update'.$post->id])
     </div>
-    <trigger click="postModalEditButton{{ $post->id }}" function="loadEditModalContent" function-args="{{ route('post.edit', ['id' => $post->id]) }}" />
+    <trigger click="postModalEditButton{{ $post->id }}" function="loadPostEditModalContent" function-args="{{ route('post.edit', ['id' => $post->id]) }}" />
+@endif
+@if (count($errors->$commentErrors) > 0 && $post->id == session('commented_post_id'))
+    <div class="d-none" id="errors">
+        @include('templates.form.errors', ['fields' => ['comment'], 'class' => 'alert alert-danger py-2 my-2', 'bag' => 'post_comment_update'.session('comment_id')])
+    </div>
+    <trigger click="commentModalEditButton{{ session('comment_id') }}" function="loadCommentEditModalContent" function-args="{{ route('post.comment.edit', [$post->id, session('comment_id')]) }}" />
 @endif
 
 <div class="post border p-3" style="position: relative;">
@@ -57,7 +64,18 @@
         <div class="collapse {{ (session('comment') && session('comment')->post_id == $post->id) || session('commented_post_id') ? 'show' : '' }} mt-4 text-left" id="collapsePost{{ $post->id }}">
             @if ($post->comments->count())
             @foreach ($post->comments->all() as $comment)
-                <div id="comment{{ $comment->id }}Wrapper" class="post-comment border-bottom pb-2 mt-2" {{ session('comment') && session('comment')->id == $comment->id ? 'scrollTo' : '' }}>
+                <div id="comment{{ $comment->id }}Wrapper" style="position: relative;" class="post-comment border-bottom pb-2 mt-2" {{ session('comment') && session('comment')->id == $comment->id ? 'scrollTo' : '' }}>
+                    @if($comment->user->id == Auth::user()->id)
+                        <div class="dropdown three-dots-dropdown dropleft">
+                            <a class="three-dots-button clickable-lgray" href="#" role="button" id="comment{{ $comment->id }}ThreeDotsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="comment{{ $comment->id }}ThreeDotsDropdown">
+                                <a class="dropdown-item" data-toggle="modal" id="commentModalEditButton{{ $comment->id }}" data-id="{{ $comment->id }}" data-url="{{ route('post.comment.edit', [$post->id, $comment->id]) }}" data-target="#editCommentModal" href="#">Editar</a>
+                                <button class="dropdown-item" data-confirm="Atenção||Deseja mesmo remover o comentário? Essa ação é irreversível!" data-url="{{ route('post.comment.delete', [$post->id, $comment->id]) }}" data-class="text-danger">Remover</button>
+                            </div>
+                        </div>
+                    @endif
                     <div class="post-comment-avatar"><img src="{{ asset($comment->user->photo) }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div>
                     <div class="post-comment-author font-weight-bold font-sm"> <a href="{{route('user.profile', $comment->user->username)}}" class="link-body-underline font-weight-bold">{{ $comment->user->fullName }} </a> </div>
                     <div class="post-comment-content font-sm">{{ $comment->comment }}</div>
@@ -89,3 +107,4 @@
         </div><!-- collapse -->
     </div><!--post-footer-->
 </div><!--post-->
+@include('post.comment.edit')

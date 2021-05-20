@@ -60,11 +60,13 @@ class PostCommentsController extends Controller
             return redirect()->back()->with([
                 'success' => true,
                 'message' => 'Comentário editado com sucesso!',
+                'comment' => $return['data']
             ]);
         } else {
             return redirect()->back()->with([
                 'success' => false,
-                'message' => $return['message']
+                'message' => $return['message'],
+                'comment' => $return['data']
             ]);
         }
     }
@@ -81,12 +83,25 @@ class PostCommentsController extends Controller
             return redirect()->back()->with([
                 'success' => true,
                 'message' => 'Comentário removido com sucesso!',
+                'commented_post_id' => $postId
             ]);
         } else {
             return redirect()->back()->with([
                 'success' => false,
-                'message' => $return['message']
+                'message' => $return['message'],
+                'commented_post_id' => $postId
             ]);
+        }
+    }
+
+    public function ajaxEdit($postId, $id, Request $request) {
+        $return = $this->service->ajaxEdit(['id' => $id]);
+        if($return['success']) {
+            return response()->json([
+                'view' => $return['data']   
+            ]);
+        } else {
+            return response()->json($return['message'], 500);
         }
     }
 }
