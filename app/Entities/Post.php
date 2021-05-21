@@ -33,10 +33,10 @@ class Post extends Model
     }
 
     public static function feed(User $user) {
-        return self::whereIn('user_id', array_merge([$user->id], $user->followeds->pluck('followed_id')->all()))->orderBy('created_at', 'desc');
+        return self::whereIn('user_id', array_merge([$user->id], $user->followeds->pluck('followed_id')->all()));
     }
 
     public static function activity(User $user) {
-        return self::where('user_id', $user->id)->orderBy('created_at', 'desc');
+        return self::join('post_comments', 'posts.id', 'post_comments.post_id')->where('post_comments.user_id', $user->id)->where('post_comments.deleted_at', null)->orWhere('posts.user_id', $user->id)->select('posts.*')->orderBy('post_comments.created_at', 'desc')->orderBy('posts.created_at', 'desc');
     }
 }

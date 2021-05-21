@@ -78,7 +78,8 @@
                     @endif
                     <div class="post-comment-avatar"><img src="{{ asset($comment->user->photo) }}" alt="user-avatar" class="size-xs rounded-circle mr-3 float-left"></div>
                     <div class="post-comment-author font-weight-bold font-sm"> <a href="{{route('user.profile', $comment->user->username)}}" class="link-body-underline font-weight-bold">{{ $comment->user->fullName }} </a> </div>
-                    <div class="post-comment-content font-sm">{{ $comment->comment }}</div>
+                    <div class="post-comment-content">{{ $comment->comment }}</div>
+                    <div class="font-sm text-muted">{{ $comment->timeSinceCreated }}</div>
                     <div class="clear"></div>
                 </div><!--post-comment-->  
             @endforeach
