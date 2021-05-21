@@ -37,6 +37,6 @@ class Post extends Model
     }
 
     public static function activity(User $user) {
-        return self::join('post_comments', 'posts.id', 'post_comments.post_id')->where('post_comments.user_id', $user->id)->where('post_comments.deleted_at', null)->orWhere('posts.user_id', $user->id)->select('posts.*')->orderBy('post_comments.created_at', 'desc')->orderBy('posts.created_at', 'desc');
+        return self::join('post_comments', 'posts.id', 'post_comments.post_id')->where('post_comments.user_id', $user->id)->where('post_comments.deleted_at', null)->orWhere('posts.user_id', $user->id)->select('posts.*')->orderBy('post_comments.created_at', 'desc')->orderBy('posts.created_at', 'desc')->distinct();
     }
 }
