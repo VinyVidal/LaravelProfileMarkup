@@ -16,7 +16,7 @@ class PostsController extends Controller
 {
     use ValidatesRequests;
 
-    //private $service;
+    private $service;
 
     public function __construct(PostService $service)
     {

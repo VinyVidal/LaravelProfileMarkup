@@ -28,7 +28,7 @@
           </a>
           <div class="collapse" id="profileMobileCollapse">
             <a class="dropdown-item" href="{{ route('user.profile') }}">Meu Perfil</a>
-          <a class="dropdown-item" href="#">Configurações</a>
+          <a class="dropdown-item" href="{{ route('user.config') }}">Configurações</a>
           <a class="dropdown-item" href="{{ route('user.logout') }}">Sair</a>
           </div>
         </li>
@@ -45,7 +45,7 @@
           <h5 class="ml-3">{{ $username ?? 'user' }}</h5>
           <hr>
           <a class="dropdown-item" href="{{ route('user.profile') }}">Meu Perfil</a>
-          <a class="dropdown-item" href="#">Configurações</a>
+          <a class="dropdown-item" href="{{ route('user.config') }}">Configurações</a>
           <a class="dropdown-item" href="{{ route('user.logout') }}">Logout</a>
         </div><!-- dropdown-menu -->
       </div><!-- dropdown -->

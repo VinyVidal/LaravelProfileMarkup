@@ -46,6 +46,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/profile/friends/{username?}', ['as' => 'user.profile.friends', 'uses' => 'ProfileController@showFriends']);
     Route::post('/profile/edit', ['as' => 'user.profile.edit', 'uses' => 'ProfileController@update']);
 
+    /* -------------- USER CONFIGURATIONS --------------*/
+    Route::get('/configuration', ['as' => 'user.config', 'uses' => 'ConfigurationController@index']);
+    Route::post('/configuration/update', ['as' => 'user.config.update', 'uses' => 'ConfigurationController@update']);
+
     /* -------------- USER LOGOUT --------------*/
     Route::get('/logout', ['as' => 'user.logout', 'uses' => 'UsersController@doLogout']);
 });

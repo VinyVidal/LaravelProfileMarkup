@@ -2,11 +2,14 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\PasswordExists;
 use Illuminate\Foundation\Http\FormRequest;
-use App\Rules\Name;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
-class UserCreateStep1Request extends FormRequest
+class UserUpdateRequest extends FormRequest
 {
+    protected $errorBag = 'user_update';
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -14,7 +17,7 @@ class UserCreateStep1Request extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -26,8 +29,11 @@ class UserCreateStep1Request extends FormRequest
     {
         return [
             'fullName'  => 'required|min:3|max:100|regex:/^[A-Za-záàâãéèêíïóôõöúçñÁÀÂÃÉÈÍÏÓÔÕÖÚÇÑ ]+$/',
-            'email'     => 'required|email|unique:users,email',
+            'email'     => [Rule::requiredIf(Auth::user()->socials->count() === 0), 'email', 'unique:users,email,'.Auth::user()->id],
             'birth'     => 'required|date',
+            'oldPassword'       => ['sometimes', 'nullable', 'required_with:newPassword', 'min:6', new PasswordExists],
+            'newPassword'       => [],
+            'confirmPassword'   => 'same:newPassword'
         ];
     }
 }

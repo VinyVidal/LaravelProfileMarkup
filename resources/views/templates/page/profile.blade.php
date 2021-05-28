@@ -100,9 +100,11 @@
                         <li class="nav-item">
                           <a class="nav-link{{ Route::currentRouteName() == 'user.profile.friends' ? ' active' : '' }} text-body border-bottom" scroll="#profile-content" href="{{ route('user.profile.friends', $visitor ? $user->username : null) }}">Amigos</a>
                         </li>
-                        <li class="nav-item">
-                          <a class="nav-link text-body" href="#">Configurações</a>
-                        </li>
+                        @if ($user->id === Auth::user()->id)
+                          <li class="nav-item">
+                            <a class="nav-link text-body" href="{{ route('user.config') }}">Configurações</a>
+                          </li>
+                        @endif
                       </ul><!-- profile-nav -->
                 </div><!-- col -->
                 <div id="profile-content" scrollTo class="col-md ml-md-5 mt-3 mt-md-0 bg-light p-0 rounded">
