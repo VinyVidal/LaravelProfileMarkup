@@ -81,6 +81,15 @@ class User extends Authenticatable
     }
 
     /**
+     * Returns TRUE in case this Entity has a PostLike relationship with the parameter post
+     * 
+     */
+    public function LikedPost(Post $post)
+    {
+        return PostLike::where('post_id', $post->id)->where('user_id', $this->id)->exists();
+    }
+
+    /**
      * Sets a unique username to the user
      * @return string $username
      */

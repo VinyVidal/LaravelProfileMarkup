@@ -25,6 +25,9 @@
     </div>
     <trigger click="commentModalEditButton{{ session('comment_id') }}" function="loadCommentEditModalContent" function-args="{{ route('post.comment.edit', [$post->id, session('comment_id')]) }}" />
 @endif
+@if (session('post_id') == $post->id)
+    <span id="post{{ $post->id }}Scroll" scrollTo></span>
+@endif
 
 <div class="post border p-3" style="position: relative;">
     <div class="post-header">
@@ -53,7 +56,11 @@
     </div><!--post-content-->
     
     <div class="post-footer text-center mt-3 p-2 border-top border-bottom">
-        <span class="post-likes clickable-lgray"><i class="far fa-thumbs-up fa-2x"></i> 100</span>
+        @if (Auth::user()->likedPost($post))
+            <span class="post-likes clickable-lgray" title="Descurtir" onclick="window.location.href='{{ route('post.unlike', [$post->id, 'user_id' => Auth::user()->id]) }}'"><i class="fas fa-thumbs-up fa-2x"></i> {{ $post->likes->count() }}</span>
+        @else
+            <span class="post-likes clickable-lgray" title="Curtir" onclick="window.location.href='{{ route('post.like', [$post->id, 'user_id' => Auth::user()->id]) }}'"><i class="far fa-thumbs-up fa-2x"></i> {{ $post->likes->count() }}</span>
+        @endif
         {{-- <span class="mx-5"></span> --}}
         <a data-toggle="collapse" href="#collapsePost{{ $post->id }}" class="text-body">
             <span class="post-comments-info clickable-lgray"><i class="far fa-comment fa-2x"></i> {{ $post->comments->count() }}</span>
