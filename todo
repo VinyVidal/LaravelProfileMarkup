@@ -1,4 +1,4 @@
-TODO: Post Likes, visibility
-TODO: User profile -> See liked
+TODO: Post visibility
+TODO: Create user_profile_activity table to sort activities better and show activity description (user x liked x post...)
 TODO: Notifications
 TODO: Real-time chat between two users
