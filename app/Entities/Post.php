@@ -5,6 +5,7 @@ namespace App\Entities;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Collection;
 
 class Post extends Model
 {
@@ -41,6 +42,14 @@ class Post extends Model
     }
 
     public static function activity(User $user) {
-        return self::join('post_comments', 'posts.id', 'post_comments.post_id')->where('post_comments.user_id', $user->id)->where('post_comments.deleted_at', null)->orWhere('posts.user_id', $user->id)->select('posts.*')->orderBy('post_comments.created_at', 'desc')->orderBy('posts.created_at', 'desc')->distinct();
+        $query = self::leftJoin('post_comments', 'posts.id', 'post_comments.post_id')
+            ->where(function($qr) use ($user) {
+                $qr->where('post_comments.user_id', $user->id)
+                    ->where('post_comments.deleted_at', null);
+            })
+            ->orWhere(function($qr) use ($user) {
+                $qr->where('posts.user_id', $user->id);
+            })->select('posts.*')->orderBy('created_at', 'desc')->distinct();
+        return $query;
     }
 }
