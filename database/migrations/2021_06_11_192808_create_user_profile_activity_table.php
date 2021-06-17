@@ -18,7 +18,6 @@ class CreateUserProfileActivityTable extends Migration
 
             $table->unsignedInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->string('description');
             $table->string('model');
             $table->unsignedInteger('model_id');
 

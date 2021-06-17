@@ -3,6 +3,7 @@ namespace App\Services;
 
 use Exception;
 use App\Entities\PostComment;
+use App\Entities\UserActivity;
 use App\Exceptions\Response;
 
 class PostCommentService {
@@ -11,6 +12,14 @@ class PostCommentService {
             $comment = new PostComment();
             $comment->fill($data);
             $comment->save();
+
+            // Register activity
+            $activityService = new UserActivityService;
+            $activityService->store([
+                'user_id' => $comment->user_id,
+                'model' => PostComment::class,
+                'model_id' => $comment->id
+            ]);
 
             return [
                 'success' => true,

@@ -23,6 +23,14 @@ class PostService {
 
             $post->save();
 
+            // Register activity
+            $activityService = new UserActivityService;
+            $activityService->store([
+                'user_id' => $post->user_id,
+                'model' => Post::class,
+                'model_id' => $post->id
+            ]);
+
             return [
                 'success' => true,
                 'data' => $post

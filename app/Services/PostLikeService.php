@@ -16,6 +16,14 @@ class PostLikeService {
             $like->fill($data);
             $like->save();
 
+            // Register activity
+            $activityService = new UserActivityService;
+            $activityService->store([
+                'user_id' => $like->user_id,
+                'model' => PostLike::class,
+                'model_id' => $like->id
+            ]);
+
             return [
                 'success' => true,
                 'data' => $like
