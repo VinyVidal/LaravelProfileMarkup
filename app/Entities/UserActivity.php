@@ -9,6 +9,8 @@ class UserActivity extends Model
 {
     use SoftDeletes;
 
+    protected $table = 'user_profile_activity';
+
     /**
      * The attributes that are mass assignable.
      *
@@ -29,7 +31,7 @@ class UserActivity extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function model() {
+    public function entity() {
         return $this->belongsTo($this->model, 'model_id');
     }
 }
