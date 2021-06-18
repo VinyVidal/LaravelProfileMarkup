@@ -2,8 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Constants\PostVisibilityConstant;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Entities\Post;
+use App\Rules\Constant;
 use App\Rules\Media;
 
 class PostUpdateRequest extends FormRequest
@@ -32,7 +34,7 @@ class PostUpdateRequest extends FormRequest
         return [
             'text' => 'required|string|max:500',
             'uploadedMedia' => ['nullable', 'file', new Media],
-            'visibility' => 'required|integer'
+            'visibility' => ['required', 'integer', new Constant(PostVisibilityConstant::class)],
         ];
     }
 }

@@ -32,7 +32,7 @@
         
             {!! Form::open(['route' => 'post.store', 'method' => 'post', 'enctype' => 'multipart/form-data']) !!}
 
-            @include('templates.form.select', ['name' => 'visibility', 'value' => [0 => 'Visível para todos', 1 => 'Somente eu']])
+            @include('templates.form.select', ['name' => 'visibility', 'value' => PostVisibilityConstant::getOptions()])
             @include('templates.form.textarea', ['name' => 'text', 'rows' => 6, 'attributes' => ['placeholder' => 'Escreva algo para a sua publicação...']])
 
             @include('templates.form.media-previewer', ['fileInputId' => 'postMedia', 'class' => 'img img-fluid'])

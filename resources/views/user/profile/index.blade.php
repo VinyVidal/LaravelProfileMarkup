@@ -15,8 +15,10 @@
         {{-- Post listing --}}
         @if ((count($activities) > 0))
             @foreach ($activities as $activity)
-                <p class="mb-1 mt-3 bg-lgray p-3">{!! $activity->description !!}</p>
-                @include('post.index', ['post' => $activity->post])
+                @if ($activity->post->visible(Auth::user()))
+                    <p class="mb-1 mt-3 bg-lgray p-3">{!! $activity->description !!}</p>
+                    @include('post.index', ['post' => $activity->post])
+                @endif
             @endforeach
         @else
             Nenhuma atividade

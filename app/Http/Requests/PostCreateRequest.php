@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests;
 
+use App\Constants\PostVisibilityConstant;
+use App\Rules\Constant;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Rules\Media;
 
@@ -29,7 +31,7 @@ class PostCreateRequest extends FormRequest
         return [
             'text' => 'required|string|max:500',
             'uploadedMedia' => ['nullable', 'file', new Media],
-            'visibility' => 'required|integer',
+            'visibility' => ['required', 'integer', new Constant(PostVisibilityConstant::class)],
             'user_id' => 'required|integer'
         ];
     }

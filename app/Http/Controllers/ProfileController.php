@@ -42,10 +42,18 @@ class ProfileController extends Controller
                 return redirect(route('user.profile'));
             }
         }
+
+        $activities = UserActivity::where('user_id', $user->id)->orderBy('created_at', 'desc')->get();
+        foreach($activities as $i => $activity) {
+            if(!$activity->post->visible(Auth::user())) {
+                unset($activities[$i]);
+            }
+        }
+
         return view('user.profile.index', [
             'visitor' => $visitor,
             'user' => $user,
-            'activities' => UserActivity::where('user_id', $user->id)->orderBy('created_at', 'desc')->get()
+            'activities' => $activities
         ]);
     }
 
