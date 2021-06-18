@@ -5,6 +5,26 @@
 @endsection
 
 @section('inner.content')
+    <div class="container my-3">
+        <div class="row">
+        <div class="col">
+            @if (session('message'))
+                <div class="alert alert-{{ session('success') == true ? 'success' : 'danger' }}" role="alert">
+                {{ session('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+            @endif
+        </div>
+        </div>
+        <div class="row">
+            <div class="col-md mt-3 mt-md-0 bg-light p-0 rounded">
+                @yield('inner-content')
+            </div><!-- col -->
+        </div><!-- row -->
+    </div><!-- container -->
+
     <h3 class="text-center">Entrar no Profile Markup</h3>
     {!! Form::open(['route' => 'user.doLogin', 'method' => 'post']) !!}
     @include('templates.form.input', ['name' => 'email', 'type' => 'email','label' => 'Email'])

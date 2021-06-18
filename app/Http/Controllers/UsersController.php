@@ -141,7 +141,9 @@ class UsersController extends Controller
         }
         else
         {
-            return redirect()->route('user.login');
+            return redirect()->route('user.login')->with([
+                'message' => 'Username or password incorrect!'
+            ]);
         }
     }
 
