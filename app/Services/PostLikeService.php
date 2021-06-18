@@ -3,6 +3,7 @@ namespace App\Services;
 
 use Exception;
 use App\Entities\PostLike;
+use App\Entities\UserActivity;
 use App\Exceptions\Response;
 
 class PostLikeService {
@@ -38,6 +39,9 @@ class PostLikeService {
             $like = PostLike::where('user_id', $data['user_id'])
                 ->where('post_id', $data['post_id'])->first();
             $like->delete();
+
+            //Delete activity
+            UserActivity::where('model', PostLike::class)->where('model_id', $like->id)->delete();
 
             return [
                 'success' => true,

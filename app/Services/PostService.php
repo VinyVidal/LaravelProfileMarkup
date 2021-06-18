@@ -5,6 +5,7 @@ use Exception;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Entities\Post;
+use App\Entities\UserActivity;
 use App\Exceptions\Response;
 
 class PostService {
@@ -66,7 +67,22 @@ class PostService {
     public function delete(int $id)
     {
         try {
-            Post::find($id)->delete();
+            $post = Post::find($id);
+            $post->delete();
+
+            //Delete activity
+            UserActivity::where('model', Post::class)->where('model_id', $post->id)->delete();
+
+            //Delete Related comments
+            foreach($post->comments->all() as $comment) {
+                $commentService = new PostCommentService;
+                $commentService->delete($comment->id);
+            }
+            //Delete Related likes
+            foreach($post->likes->all() as $like) {
+                $likeService = new PostLikeService;
+                $likeService->delete(['user_id' => $like->user_id, 'post_id' => $like->post_id]);
+            }
 
             return [
                 'success' => true

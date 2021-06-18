@@ -50,6 +50,9 @@ class PostCommentService {
             $comment = PostComment::find($id);
             $comment->delete();
 
+            //Delete activity
+            UserActivity::where('model', PostComment::class)->where('model_id', $comment->id)->delete();
+
             return [
                 'success' => true
             ];
