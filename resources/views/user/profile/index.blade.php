@@ -13,9 +13,10 @@
         @include('post.edit')
 
         {{-- Post listing --}}
-        @if ((count($posts) > 0))
-            @foreach ($posts as $post)
-                @include('post.index', ['post' => $post])
+        @if ((count($activities) > 0))
+            @foreach ($activities as $activity)
+                <p class="mb-1 mt-3 bg-lgray p-3">{!! $activity->description !!}</p>
+                @include('post.index', ['post' => $activity->post])
             @endforeach
         @else
             Nenhuma atividade

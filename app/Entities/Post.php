@@ -38,7 +38,7 @@ class Post extends Model
     }
 
     public static function feed(User $user) {
-        return self::whereIn('user_id', array_merge([$user->id], $user->followeds->pluck('followed_id')->all()));
+        return self::whereIn('user_id', array_merge([$user->id], $user->followeds->pluck('followed_id')->all()))->orderBy('created_at', 'desc');
     }
 
     public static function activity(User $user) {

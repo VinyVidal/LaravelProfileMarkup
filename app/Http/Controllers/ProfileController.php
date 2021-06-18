@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use App\Entities\User;
+use App\Entities\UserActivity;
 use App\Services\UserService;
 
 /**
@@ -44,7 +45,7 @@ class ProfileController extends Controller
         return view('user.profile.index', [
             'visitor' => $visitor,
             'user' => $user,
-            'posts' => Post::activity($user)->get()
+            'activities' => UserActivity::where('user_id', $user->id)->orderBy('created_at', 'desc')->get()
         ]);
     }
 
